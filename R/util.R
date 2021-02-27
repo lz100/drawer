@@ -1,8 +1,5 @@
 ####### Some internal shiny utils
 
-#' @importFrom utils packageVersion
-NULL
-
 # can't import shiny internal function, gives warnings, so rewrite here
 reactiveStop <- function(message = "\r              ", class = NULL){
     cond <- structure(list(message = message),

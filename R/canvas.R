@@ -6,26 +6,63 @@
 #' @param canvasID string, an unique HTML ID
 #' @param title string, title of the canvas
 #' @param height string, css value of initial height of the canvas, like "100vh"
-#' for full height current window, "50vh" for half.
+#' for full height current window, "50vh" for half. Consider the banner takes
+#' some height, so default is set to "90vh".
 #' @param width string, css value of initial width of the canvas
-#' @param on_start bool
+#' @param on_start `TRUE` or a CSS selector. See details
 #'
 #' @return a HTML component to be added to a Shiny app or document
 #' @details
+#' ### outside Shiny or Rmarkdown
 #' **If you are not working in Shiny or R markdown, you need to add the**
-#' **required full "Bootstrap3" javascript and CSS + latest "jquery" + "font-awesome" dependencies by yourself.**
+#' **required full "Bootstrap3" javascript and CSS + latest "jquery" dependencies by yourself.**
 #'
-#'
+#' ### height
 #' - `height`, css style `vh` is safer than `%` is not safe, unless the parent
 #' has some defined height, "%" will work. Otherwise, if the parent height is "auto"
 #' or not defined, and you choose "100%", canvas will still have 0 height.
+#'
+#' ### `on_start`
+#' This argument specify if you want to initiate the canvas when the document is loaded.
+#' If `TRUE`, then when the document loading is done, start the canvas. The problem
+#' is if you set the height to be "vh" (view height) units and if the canvas is
+#' hidden, like in a different tab and not displayed on start, the view height is
+#' 0, because it is hidden on another tab (display property is `none`), so it
+#' will cause the canvas cannot be initiated properly.
+#'
+#' The solution is to bind the initiation with a clicking event, like on a tab or a button.
+#' For example, make a button on the second tab and bind `on_start` to that button:
+#' `on_start = "buttonID"`. Then when users click on that button, canvas initiate.
+#'
+#' If you want to do it automatically, like clicking on a certain tab, some CSS
+#' knowledge may required. For example, in Shiny, you can use [shiny::tabsetPanel]
+#' to create a tab panel.
+#'
+#' ```r
+#' tabsetPanel(id = "tabs",
+#'     tabPanel("Tab A", value = "A", ...),
+#'     tabPanel("Tab B", value = "B", ...),
+#'     ...
+#' )
+#'
+#' ````
+#' Then, bind to it `canvas(on_start = '#tabs ul a[data-value="B"]', ...)`.
+#' This means we are selecting the element with ID "tabs", which is the main tabsetPanel
+#' ID, then a list (`ul`) which is the tab titles you see on UI, and finally, the
+#' link jump to tab B, (`a[data-value="B"]`). See examples for a real case.
+#'
+#' ### Upload your own image to canvas
+#' You can drag your own images to the canvas.
+#' Support major image formats, like "jpg", "png", "svg", "gif", "webp", "bmp".
+#' Moving images like
+#' "gif", "webp" will be animated on left side preview, but will not move on canvas.
 #' @export
 #'
 #' @examples
 canvas = function(
   canvasID,
   title = "drawR",
-  height = "100vh",
+  height = "90vh",
   width = "100%",
   logo_src = "drawr/img/drawr.png",
   log_link = "https://github.com/lz100/drawR",
@@ -37,7 +74,8 @@ canvas = function(
   stopifnot(is.character(height) && length(height) == 1)
   stopifnot(is.character(width) && length(width) == 1)
   stopifnot(is.logical(on_start) && length(width) == 1)
-  tagList(
+  div(
+    class = "drawr",
     div(
       class = "canvas-box",
       id = canvasID,
@@ -73,9 +111,9 @@ canvas = function(
               <div class="check-box"></div>
               <a href="#">Save as...</a>
               <ul class="dropdown-menu">
-               <li ><a href="#"', paste0('onclick=DTC["', canvasID, '"].saveAsImg()'), '>png</a></li>
-               <li ><a href="#"', paste0('onclick=DTC["', canvasID, '"].saveAsImg(false)'), '>jpg</a></li>
-               <li ><a href="#"', paste0('onclick=DTC["', canvasID, '"].saveAsSvg()'), '>svg (coming soon...)</a></li>
+               <li ><a href="#"', paste0('onclick=drawR["', canvasID, '"].saveAsImg()'), '>png</a></li>
+               <li ><a href="#"', paste0('onclick=drawR["', canvasID, '"].saveAsImg(false)'), '>jpg</a></li>
+               <li ><a href="#"', paste0('onclick=drawR["', canvasID, '"].saveAsSvg()'), '>svg (coming soon...)</a></li>
               </ul>
             </li>
           </ul>
@@ -133,45 +171,45 @@ canvas = function(
           paste0("canvas-undo-", canvasID),
           tags$i(tags$img(src = "drawr/img/undo.png", width=15, height=15)),
           tip = "undo Ctrl+z",
-          onclick = paste0('DTC["', canvasID, '"].undo()'),
+          onclick = paste0('drawR["', canvasID, '"].undo()'),
           disabled = ""
         ),
         bannerBtn(
           paste0("canvas-redo-", canvasID),
           tags$i(tags$img(src = "drawr/img/redo.png", width=15, height=15)),
           tip = "redo Ctrl+shift+z",
-          onclick = paste0('DTC["', canvasID, '"].redo()'),
+          onclick = paste0('drawR["', canvasID, '"].redo()'),
           disabled = ""
         ),
         bannerBtn(
           paste0("canvas-front-", canvasID),
           tags$i(tags$img(src = "drawr/img/tofront.png", width=15, height=15)),
           tip = "bring to front",
-          onclick = paste0('DTC["', canvasID, '"].toFront()')
+          onclick = paste0('drawR["', canvasID, '"].toFront()')
         ),
         bannerBtn(
           paste0("canvas-forward-", canvasID),
           tags$i(tags$img(src = "drawr/img/forward.png", width=15, height=15)),
           tip = "move forward",
-          onclick = paste0('DTC["', canvasID, '"].toForward()')
+          onclick = paste0('drawR["', canvasID, '"].toForward()')
         ),
         bannerBtn(
           paste0("canvas-backward-", canvasID),
           tags$i(tags$img(src = "drawr/img/backward.png", width=15, height=15)),
           tip = "move backward",
-          onclick = paste0('DTC["', canvasID, '"].toBackward()')
+          onclick = paste0('drawR["', canvasID, '"].toBackward()')
         ),
         bannerBtn(
           paste0("canvas-back-", canvasID),
           tags$i(tags$img(src = "drawr/img/toback.png", width=15, height=15)),
           tip = "bring to back",
-          onclick = paste0('DTC["', canvasID, '"].toBack()')
+          onclick = paste0('drawR["', canvasID, '"].toBack()')
         ),
         bannerBtn(
           paste0("canvas-del-", canvasID),
           icon("trash"),
           tip = "delete (del)",
-          onclick = paste0('DTC["', canvasID, '"].delItem()')
+          onclick = paste0('drawR["', canvasID, '"].delItem()')
         ),
         div(class = "vr"),
         div(
@@ -182,7 +220,7 @@ canvas = function(
             `data-toggle` = 'tooltip',
             `data-placement` = 'left',
             title = "object opacity",
-            onclick = paste0('DTC["', canvasID, '"].changeOpacity($("#canvas-opacity-', canvasID , '").val())'),
+            onclick = paste0('drawR["', canvasID, '"].changeOpacity($("#canvas-opacity-', canvasID , '").val())'),
             tags$option("100%", value = 1),
             tags$option("90%", value = 0.9),
             tags$option("80%", value = 0.8),
@@ -224,50 +262,50 @@ canvas = function(
                   label = "New iText",
                   icon("i-cursor"),
                   tip = "Create new text",
-                  onclick = paste0('DTC["', canvasID, '"].newItext()')
+                  onclick = paste0('drawR["', canvasID, '"].newItext()')
                 ),
                 tags$hr(),
                 bannerBtn(
                   paste0("canvas-bold-", canvasID),
                   icon("bold"),
                   tip = "Bold ctrl+b",
-                  onclick = paste0('DTC["', canvasID, '"].itextBold()')
+                  onclick = paste0('drawR["', canvasID, '"].itextBold()')
                 ),
                 bannerBtn(
                   paste0("canvas-italic-", canvasID),
                   icon("italic"),
                   tip = "italic ctrl+i",
-                  onclick = paste0('DTC["', canvasID, '"].itextItalic()')
+                  onclick = paste0('drawR["', canvasID, '"].itextItalic()')
                 ),
                 bannerBtn(
                   paste0("canvas-underline-", canvasID),
                   icon("underline"),
                   tip = "underline",
-                  onclick = paste0('DTC["', canvasID, '"].itextUnderline()')
+                  onclick = paste0('drawR["', canvasID, '"].itextUnderline()')
                 ),
                 bannerBtn(
                   paste0("canvas-linethrough-", canvasID),
                   icon("strikethrough"),
                   tip = "Linethrough",
-                  onclick = paste0('DTC["', canvasID, '"].itextLinethrough()')
+                  onclick = paste0('drawR["', canvasID, '"].itextLinethrough()')
                 ),
                 bannerBtn(
                   paste0("canvas-superscript-", canvasID),
                   icon("superscript"),
                   tip = "superscript ctrl+.",
-                  onclick = paste0('DTC["', canvasID, '"].itextSuperScript()')
+                  onclick = paste0('drawR["', canvasID, '"].itextSuperScript()')
                 ),
                 bannerBtn(
                   paste0("canvas-subscript-", canvasID),
                   icon("subscript"),
                   tip = "subscript ctrl+,",
-                  onclick = paste0('DTC["', canvasID, '"].itextSubScript()')
+                  onclick = paste0('drawR["', canvasID, '"].itextSubScript()')
                 ),
                 bannerBtn(
                   paste0("canvas-removeformat-", canvasID),
                   icon("remove-format"),
                   tip = "remove script Ctrl+shift+.",
-                  onclick = paste0('DTC["', canvasID, '"].itextRemoveFormat()')
+                  onclick = paste0('drawR["', canvasID, '"].itextRemoveFormat()')
                 ),
                 tags$hr(),
                 div(
@@ -295,7 +333,7 @@ canvas = function(
         if(isTRUE(on_start)){
           tags$script(paste0(
             '$(function(){',
-            'DTC.', canvasID, ' = new dtc("', canvasID, '");',
+            'drawR.', canvasID, ' = new drawr("', canvasID, '");',
             '});'
           ))
         } else {
@@ -304,7 +342,7 @@ canvas = function(
                     $("',  on_start, '").on("click", function(){
                         if (!canvasInit){
                             setTimeout(function() {',
-            'DTC.', canvasID, ' = new dtc("', canvasID, '");
+            'drawR.', canvasID, ' = new drawr("', canvasID, '");
                                 canvasInit = true;
                             }, 1000)
                         }
@@ -314,29 +352,42 @@ canvas = function(
         }
       )
     ),
+    div(
+      id = paste0(canvasID, "-progress"),
+      class = "progress-container",
+      tags$label(""),
+      div(
+        class = "progress",
+        div(
+          class="progress-bar", role="progressbar", `aria-valuenow`="70",
+          `aria-valuemin`="0", `aria-valuemax`="100", style="width:70%"
+        )
+      )
+    ),
     bsModal(
       id = paste0(canvasID, "-shortcut"),
       title = "Keyboard shortcuts",
       size = "large",
       div(
         id = paste0(canvasID, "-shortcut-table"),
-        DT::datatable(
-          tibble::tribble(
-            ~Description, ~Shortcut,
-            'Zoom in/out', 'Mouse wheel',
-            'Panning', 'Alt+mouse hold left click and dragging',
-            'Remove object', 'del',
-            'undo', 'Ctrl+z',
-            'redo', 'Ctrl+shift+z',
-            'Select multiple objects', 'Hold shift + left clicks',
-            'bold', 'Ctrl+b',
-            'italic', 'Ctrl+i',
-            'superscript', 'Ctrl+.',
-            'subscript', 'Ctrl+,',
-            'renmove script', 'Ctrl + shift + .'
-          ),
-          width = "100%"
-        )
+        tags$table(
+          tags$tr(tags$th("Description"), tags$th("Shortcut"), tags$th("Note")),
+          tags$tr(tags$td('Zoom in/out'),  tags$td('Mouse wheel'), tags$td('')),
+          tags$tr(tags$td('Panning'),  tags$td('Alt+mouse hold left click and dragging'), tags$td('')),
+          tags$tr(tags$td('Remove object'),  tags$td('del'), tags$td('')),
+          tags$tr(tags$td('Copy'),  tags$td('Ctrl+c'), tags$td('')),
+          tags$tr(tags$td('Cut'),  tags$td('Ctrl+x'), tags$td('')),
+          tags$tr(tags$td('Paste'),  tags$td('Ctrl+v'), tags$td('')),
+          tags$tr(tags$td('undo'),  tags$td('Ctrl+z'), tags$td('')),
+          tags$tr(tags$td('redo'),  tags$td('Ctrl+shift+z'), tags$td('')),
+          tags$tr(tags$td('Select multiple objects'),  tags$td('Hold shift + left clicks'), tags$td('')),
+          tags$tr(tags$td('bold'),  tags$td('Ctrl+b'), tags$td('')),
+          tags$tr(tags$td('italic'),  tags$td('Ctrl+i'), tags$td('')),
+          tags$tr(tags$td('superscript'),  tags$td('Ctrl+.'), tags$td('Only works in text editing mode')),
+          tags$tr(tags$td('subscript'),  tags$td('Ctrl+,'), tags$td('Only works in text editing mode')),
+          tags$tr(tags$td('renmove script'),  tags$td('Ctrl + shift + .'), tags$td('Only works in text editing mode'))
+        ),
+        tags$label("*Use Command key instead of Ctrl on Mac")
       ),
       tags$script(paste0(
         '
@@ -348,14 +399,14 @@ canvas = function(
         }
       })
       '
-      )),
-      drawrDepend()
+      ))
     ),
     bsModal(
       id = paste0(canvasID, "-help"),
       title = "About the canvas",
       p("drawR V0.1"),
       p("This canvas is developed by Le Zhang and other contributors under GPL-3 License")
-    )
+    ),
+    drawrDepend()
   )
 }

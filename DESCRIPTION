@@ -17,7 +17,8 @@ Imports:
     magrittr,
     glue,
     bsplus,
-    utils
+    utils,
+    shiny
 Suggests:
     testthat
 License: GPL (>= 3)

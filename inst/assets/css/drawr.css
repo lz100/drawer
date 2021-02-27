@@ -36,7 +36,7 @@
    overflow: auto;
 }
 
-.canvas-container.dtc-canvas-over {
+.canvas-container.drawr-canvas-over {
     border: 5px dashed #d9d9d9;
 }
 
@@ -49,7 +49,7 @@
   border: 2px solid #d9d9d9;
 }
 
-.canvas-img-box img.dtc-canvas-img-dragging {
+.canvas-img-box img.drawr-canvas-img-dragging {
     opacity: 0.4;
 }
 
@@ -382,4 +382,64 @@
   vertical-align: top;
 }
 
+/*table, shortcut table*/
 
+.drawr table {
+  margin: 0 auto;
+}
+
+.drawr thead {
+  border-bottom: 2px solid #9e9e9e;
+}
+
+.drawr th:not(:first-of-type) {
+  border-left: 1px solid #9e9e9e;
+}
+
+.drawr th {
+  padding: 0 5px;
+}
+
+.drawr td:not(:first-of-type) {
+  border-left: 1px solid #9e9e9e;
+}
+
+.drawr td {
+  padding: 0 5px;
+}
+
+.drawr tbody td {
+  padding: 5px 0;
+}
+
+.drawr tr:nth-child(even) {
+      background-color: rgb(243 243 243);
+}
+
+.drawr tbody tr:not(:first-of-type):hover {
+    opacity: 1;
+    background-color: rgb(51 122 183 / 20%);
+}
+
+
+/* to canvas text btn*/
+.to-canvas-text input[type="text"]:focus {
+    outline: none;
+}
+
+
+/* progress */
+.progress-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    height: 20px;
+    width: 60vw;
+    z-index: 100;
+    left: 25%;
+    opacity: 0.9;
+}
+
+.progress-container .progress {
+  height: 10px;
+}

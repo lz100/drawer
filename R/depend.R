@@ -20,6 +20,15 @@ drawrDepend <- function() {
       all_files = FALSE
     ),
     htmltools::htmlDependency(
+      name = "toastr",
+      version = "2.1.1",
+      package = "drawR",
+      src = c(href = "drawr", file = "assets"),
+      script = "js/toastr.min.js",
+      stylesheet = "css/toastr.min.css",
+      all_files = FALSE
+    ),
+    htmltools::htmlDependency(
       name = "fabric",
       version = "4.2.0",
       package = "drawR",
@@ -32,7 +41,7 @@ drawrDepend <- function() {
       version = "0.2",
       package = "drawR",
       src = c(href = "drawr", file = "assets"),
-      script = "js/fabric-history.js",
+      script = "js/drawr_fabric-history.js",
       all_files = FALSE
     ),
     htmltools::htmlDependency(
@@ -56,7 +65,12 @@ drawrDepend <- function() {
       version = packageVersion("drawR"),
       package = "drawR",
       src = c(href = "drawr", file = "assets"),
-      script = "js/drawr.js",
+      script = list(
+        "js/drawr_drag_upload.js",
+        "js/drawr_to_canvas_btn.js",
+        "js/drawr_other.js",
+        "js/drawr.js" # always load the main file the last
+        ),
       stylesheet = "css/drawr.css",
       all_files = FALSE
     ),

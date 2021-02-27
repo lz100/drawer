@@ -5,4 +5,5 @@ use_package("glue")
 use_package("shiny")
 use_package("bsplus")
 use_package("utils")
+use_package("shiny")
 

@@ -5,7 +5,8 @@ R markdown or any type of HTML document. Often times, plots, photos are embedded
 in the web application/file. {drawR} can take a screenshot of these image-like, or 
 any part of the HTML document and send to a canvas-like workbench to allow users 
 immediately edit the screenshot(s) within the same document. Users can quickly 
-combine, compare different screenshots and maybe make a scientific figure. 
+combine, compare different screenshots, their own images 
+and maybe make a scientific figure. 
 
 **View the pure HTML demo**: https://lezhang.shinyapps.io/drawR
 **View the online Shiny demo**: https://lezhang.shinyapps.io/drawR

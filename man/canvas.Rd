@@ -6,9 +6,11 @@
 \usage{
 canvas(
   canvasID,
-  title = "Canvas",
-  height = "85vh",
+  title = "drawR",
+  height = "100vh",
   width = "100\%",
+  logo_src = "drawr/img/drawr.png",
+  log_link = "https://github.com/lz100/drawR",
   on_start = TRUE
 )
 }

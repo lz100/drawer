@@ -1,20 +1,8 @@
-/*-----------------------extend fabric js----------------------------*/
-// add group object props
-fabric.Group.prototype.toObject = (function(toObject) {
-          return function() {
-            return fabric.util.object.extend(toObject.call(this), {
-              id: this.id,
-              selectable: this.selectable,
-              evented: this.evented
-            });
-          };
-        })(fabric.Group.prototype.toObject);
-
 
 /*-----------------------canvas class and methods----------------------------*/
-var DTC = {};
+var drawR = {};
 
-class dtc {
+class drawr {
   constructor(canvasID, height='default', width='default', startZoom=2) {
     this.canvasID = canvasID;
     this.canvasContainer = document.getElementById(`canvas-container-${this.canvasID}`);
@@ -110,6 +98,9 @@ class dtc {
     };
     this.colorInit();
 
+    // init clipboard
+    this.clipboard = undefined;
+
     //watch undo redo
     this.watchUndoRedo();
 
@@ -131,7 +122,7 @@ class dtc {
       if (zoom < 0.4) zoom = 0.4;
       canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
       canvasb.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
-      console.log(opt.e)
+      // console.log(opt.e)
       opt.e.preventDefault();
       opt.e.stopPropagation();
       //console.log(zoom);
@@ -145,7 +136,7 @@ class dtc {
           vptb[5] = canvas.getHeight() * (1 - zoom) / 2;
         }
       var transMatrix = fabric.util.invertTransform(vpt);
-      console.log(transMatrix[4], transMatrix[5]);
+      // console.log(transMatrix[4], transMatrix[5]);
       this.canvasContainer.zoom = zoom;
       this.canvasContainer.zoomX = transMatrix[4];
       this.canvasContainer.zoomY = transMatrix[5];
@@ -295,7 +286,7 @@ class dtc {
           var minX = Math.min(oc.tl.x, oc.tr.x, oc.bl.x, oc.br.x);
           var maxY = Math.max(oc.tl.y, oc.tr.y, oc.bl.y, oc.br.y);
           var minY = Math.min(oc.tl.y, oc.tr.y, oc.bl.y, oc.br.y);
-          if(DTC[canvasID].opts.objInfo){
+          if(drawR[canvasID].opts.objInfo){
             // add width height
             canvas.contextContainer.strokeText(
               `W ${(ao.width * ao.scaleX).toFixed(2)} (${(ao.scaleX*100).toFixed(0)}%) H ${(ao.height * ao.scaleY).toFixed(2)} (${(ao.scaleY*100).toFixed(0)}%)`,
@@ -316,7 +307,7 @@ class dtc {
             );
           }
           // add bound box and info
-          if(DTC[canvasID].opts.boundBox){
+          if(drawR[canvasID].opts.boundBox){
             var bound = ao.getBoundingRect();
             canvas.contextContainer.strokeRect(
               bound.left,
@@ -368,7 +359,7 @@ class dtc {
     };
 
     canvas.on('object:moving', (e) => {
-      if (!DTC[canvasID].opts.limitMove) return true;
+      if (!drawR[canvasID].opts.limitMove) return true;
       //console.log(e.target);
       var angle = e.target.angle;
       var obj = e.target;
@@ -440,14 +431,14 @@ class dtc {
   // handle iamges
   handleDragStart(e) {
     e.dataTransfer.setData('text/plain', '');
-    $(`#img-box-${this.canvasID} img`).removeClass('dtc-canvas-img-dragging');
-    this.classList.add('dtc-canvas-img-dragging');
-    console.log("start");
+    $(`#img-box-${this.canvasID} img`).removeClass('drawr-canvas-img-dragging');
+    this.classList.add('drawr-canvas-img-dragging');
+    // console.log("start");
   }
 
   handleDragEnd(e) {
-    $(this).removeClass('dtc-canvas-img-dragging');
-    console.log("end");
+    $(this).removeClass('drawr-canvas-img-dragging');
+    // console.log("end");
   }
 
   // handle canvas
@@ -459,7 +450,7 @@ class dtc {
     //console.log('y', e.layerY);
     e.dataTransfer.dropEffect = 'copy'; // See the section on the DataTransfer object.
     // NOTE: comment above refers to the article (see top) -natchiketa
-    this.classList.add('dtc-canvas-over');
+    this.classList.add('drawr-canvas-over');
     return false;
   }
 
@@ -468,7 +459,7 @@ class dtc {
   }
 
   handleDragLeave(e) {
-    this.classList.remove('dtc-canvas-over');
+    this.classList.remove('drawr-canvas-over');
   }
 
   handleDrop(e) {
@@ -476,26 +467,14 @@ class dtc {
     if (e.stopPropagation) {
         e.stopPropagation(); // stops the browser from redirecting.
     }
-    var img = document.querySelector(`#img-box-${this.canvasID} img.dtc-canvas-img-dragging`);
-    //console.log('event: ', e);
-    var setImageWidth = 100, setImageHeight = 100;
-    var zoomScale = this.zoomScale;
-    var zoomX = this.zoomX;
-    var zoomY = this.zoomY;
-    var cheight = this.canvas.getHeight();
-    var cwidth = this.canvas.getWidth();
-    var newImage = new fabric.Image(img, {
-        width: img.naturalWidth,
-        height: img.naturalHeight,
-        scaleX: setImageWidth/img.naturalWidth * zoomScale,
-        scaleY: setImageHeight/img.naturalHeight * zoomScale,
-        // Set the center of the new object based on the event coordinates relative
-        // to the canvas container.
-        left: zoomX + (e.layerX - setImageWidth/2) * zoomScale,
-        top: zoomY + (e.layerY - setImageHeight/2) * zoomScale
-    });
-    this.canvas.add(newImage);
-    this.classList.remove('dtc-canvas-over');
+    var files = e.dataTransfer.files;
+    if(files.length > 0) {
+      handleDragUpload(files, this.canvasID, e, this);
+    } else {
+      var img = document.querySelector(`#img-box-${this.canvasID} img.drawr-canvas-img-dragging`);
+      canvasLoadImg.bind(this)(img, e);
+    }
+    this.classList.remove('drawr-canvas-over');
     return false;
   }
 
@@ -532,7 +511,7 @@ class dtc {
         let el = $(this);
         if(el.attr('check') == 'true' && el.attr('check') !== undefined){
           el.find('i').show();
-          DTC[canvasID].opts[el.attr('opt-id')] = true;
+          drawR[canvasID].opts[el.attr('opt-id')] = true;
         }
       });
     });
@@ -542,11 +521,11 @@ class dtc {
       if(el.attr('check') == 'true'){
         el.attr('check', 'false');
         el.find('i').hide();
-        DTC[canvasID].opts[el.attr('opt-id')] = false;
+        drawR[canvasID].opts[el.attr('opt-id')] = false;
       } else {
         el.attr('check', 'true');
         el.find('i').show();
-        DTC[canvasID].opts[el.attr('opt-id')] = true;
+        drawR[canvasID].opts[el.attr('opt-id')] = true;
       }
     });
   }
@@ -600,11 +579,65 @@ class dtc {
     };
     var canvas = this.canvasContainer.canvas;
     var canvasID = this.canvasID;
+    // text color pickers
     $(`#canvas-text-fill-${this.canvasID}`).spectrum(spectrumConfig(canvas, canvasID, 'itextFill', 'fill'));
     $(`#canvas-text-bg-${this.canvasID}`).spectrum(spectrumConfig(canvas, canvasID, 'itextBg', 'textBackgroundColor'));
     //$(`#canvas-text-bg-${this.canvasID}`).spectrum('set', '')
 
     //picker for
+  }
+
+  // copy cut paste
+  copy(callBack = function(){}){
+    var actobj = this.canvasContainer.canvas.getActiveObject();
+    console.log(actobj);
+    if (actobj) {
+      // Clone
+      actobj.clone((object) => {
+          // save it
+          this.clipboard = object;
+
+          //If the callback method exists, call it
+          if (callBack !== undefined) callBack();
+      });
+    }
+    //console.log("copied")
+  }
+
+  cut(){
+    var canvas = this.canvasContainer.canvas;
+    this.copy(() => canvas.remove(canvas.getActiveObject()));
+    //console.log("cut")
+  }
+
+  paste() {
+    var canvas = this.canvasContainer.canvas;
+      if (this.clipboard  !== undefined) {
+        this.clipboard.clone((clonedObj) => {
+          canvas.discardActiveObject();
+          clonedObj.set({
+      			left: clonedObj.left + 10,
+      			top: clonedObj.top + 10,
+      			evented: true,
+      		});
+          if (clonedObj.type === 'activeSelection') {
+      			// active selection needs a reference to the canvas.
+      			clonedObj.canvas = canvas;
+      			clonedObj.forEachObject(function(obj) {
+      				canvas.add(obj);
+      			});
+      			// this should solve the unselectability
+      			clonedObj.setCoords();
+      		} else {
+      			canvas.add(clonedObj);
+      		}
+      		this.clipboard.top += 10;
+  	    	this.clipboard.left += 10;
+          canvas.setActiveObject(clonedObj);
+          canvas.requestRenderAll();
+        });
+      }
+      //console.log("paste")
   }
 
   // redo undo changes
@@ -630,7 +663,7 @@ class dtc {
       } else {
         undoBtn.prop('disabled', false);
       }
-      if(DTC[canvasID].canvasContainer.canvas.historyCurrentStep == DTC[canvasID].canvasContainer.canvas.history.length-1) {
+      if(drawR[canvasID].canvasContainer.canvas.historyCurrentStep == drawR[canvasID].canvasContainer.canvas.history.length-1) {
         redoBtn.prop('disabled', true);
         var tip = $(`.canvas-box *[disabled]`).next();
         if(tip.hasClass('tooltip')) tip.remove();
@@ -846,18 +879,27 @@ class dtc {
 
   // key listeners
   watchKeys(){
+    var isMac = getOS() == "Mac";
     this.canvasContainer.addEventListener('keydown', function(event){
-      if(event.ctrlKey) {
+      var isCtrl = isMac ? event.metaKey : event.ctrlKey;
+      if(isCtrl) {
         if (!event.shiftKey && event.keyCode == 90) {
           this.undo(); //Undo - CTRL+ z
         } else if (event.shiftKey && event.keyCode == 90) {
           this.redo(); //Redo - CTRL+ shift + z
+        } else if (event.keyCode == 67) {
+          this.copy() //Copy - CTRL+ c
+        } else if (event.keyCode == 88) {
+          this.cut() //Cut - CTRL+ x
+        } else if (event.keyCode == 86) {
+          this.paste() //Paste - CTRL+ v
         }
       }
     }.bind(this));
     // avoid adding to document as much as possible
     document.addEventListener('keydown', function(event){
-      if(event.ctrlKey) {
+      var isCtrl = isMac ? event.metaKey : event.ctrlKey;
+      if(isCtrl) {
         if (!event.shiftKey && event.keyCode == 66) {
           this.itextBold(); //bold - CTRL+b
         } else if (!event.shiftKey && event.keyCode == 73) {
@@ -875,7 +917,10 @@ class dtc {
   }
 }
 
+
+
 /*-----------------------help funcs----------------------------*/
+// fet fabric type
 function getType(canvas, type){
   var obj = canvas.getActiveObject();
   if(obj){
@@ -887,6 +932,8 @@ function getType(canvas, type){
   }
 }
 
+// get fabric obj style, mostly used for iText
+
 function getStyle(object, styleName) {
   if(object.getSelectionStyles && object.isEditing){
     var style = object.getSelectionStyles();
@@ -896,7 +943,7 @@ function getStyle(object, styleName) {
     object.setSelectionStart(0);
     object.setSelectionEnd(999);
     var style = object.getSelectionStyles();
-    console.log(style)
+    // console.log(style)
     return style.map(function(i){return i[styleName]});
   } else {
     return object[styleName];
@@ -969,121 +1016,14 @@ function spectrumConfig(canvas, canvasID, colorID, style){
         getAndSetStyle(canvas, "i-text", style, color);
       },
       hide: function(color){
-        color = DTC[canvasID].colors[colorID];
+        color = drawR[canvasID].colors[colorID];
         getAndSetStyle(canvas, "i-text", style, color);
       },
       change: function(color){
         color = (color) ? color.toHexString() : "";
         getAndSetStyle(canvas, "i-text", style, color, true);
-        DTC[canvasID].colors[colorID] = color;
+        drawR[canvasID].colors[colorID] = color;
       }
     };
-}
-
-/*-----------------------send to canvas button----------------------------*/
-function toCanvas(dom, canvasID){
-  var imgBox = document.querySelector(`#img-box-${canvasID}`);
-  if(imgBox === null) {throw new Error("Canvas image box not found")}
-  var node = document.querySelector(dom);
-  if (node === null) {throw new Error("Target DOM not found")}
-  domtoimage.toPng(node)
-    .then(function (dataUrl) {
-        var img = new Image(125, 125);
-        img.draggable = true;
-        img.src = dataUrl;
-        imgBox.appendChild(img);
-        $(`#img-box-${canvasID}`).trigger("img-added");
-    })
-    .catch(function (error) {
-        console.error('something went wrong!', error);
-    });
-}
-
-function toPng(dom){
-  var node = document.querySelector(dom);
-  domtoimage.toBlob(node)
-    .then(function (blob) {
-        window.saveAs(blob, 'shinydraw.png');
-  });
-}
-
-function toJpg(dom){
-  var node = document.querySelector(dom);
-  domtoimage.toJpeg(node, { quality: 1 })
-    .then(function (dataUrl) {
-        var link = document.createElement('a');
-        link.download = 'shinydraw.jpeg';
-        link.href = dataUrl;
-        link.click();
-    });
-}
-
-function toSvg(dom){
-  var node = document.querySelector(dom);
-  domtoimage.toSvg(node)
-    .then(function (dataUrl) {
-        var link = document.createElement('a');
-        link.download = 'shinydraw.svg';
-        link.href = dataUrl;
-        link.click();
-    });
-}
-
-/*---------------------------------- other ---------------------------------*/
-$(function(){
-  $('.banner-items .dropdown-menu a').click(function(e){e.preventDefault()});
-  $('.to-canvas li a').click(function(e){e.preventDefault()});
-});
-
-// add more event to jquery
-(function ($) {
-        $.each(['show', 'hide', 'fadeOut', 'fadeIn'], function (i, ev) {
-            var el = $.fn[ev];
-            $.fn[ev] = function () {
-                var result = el.apply(this, arguments);
-                result.promise().done(function () {
-                    this.triggerHandler(ev, [result]);
-                });
-                return result;
-            };
-        });
-  })(jQuery);
-
-
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});
-
-
-// move spectrum conflicts from shinyWidgets
-$(function() {
-    $('[href="shinyWidgets/spectrum/spectrum.min.css"]').remove();
-})
-
-// save base64 to blob
-// https://stackoverflow.com/questions/12168909/blob-from-dataurl
-function dataURItoBlob(dataURI) {
-  // convert base64 to raw binary data held in a string
-  // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-  var byteString = atob(dataURI.split(',')[1]);
-
-  // separate out the mime component
-  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-  // write the bytes of the string to an ArrayBuffer
-  var ab = new ArrayBuffer(byteString.length);
-
-  // create a view into the buffer
-  var ia = new Uint8Array(ab);
-
-  // set the bytes of the buffer to the correct values
-  for (var i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-  }
-
-  // write the ArrayBuffer to a blob, and you're done
-  var blob = new Blob([ab], {type: mimeString});
-  return blob;
-
 }
 

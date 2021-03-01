@@ -1,35 +1,29 @@
 
 header <- dashboardHeader(
-  title = "drawR"
+  title = "drawer"
 )
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
     menuItem("Welcome", tabName = "welcome", icon = icon("star")),
-    menuItem("Input Control", tabName = "text", icon = icon("font")),
-    menuItem("Image Display", tabName = "images", icon = icon("images")),
-    menuItem("Buttons", tabName = "buttons", icon = icon("square")),
-    menuItem("Progress control", tabName = "progress", icon = icon("tasks")),
-    menuItem("Upload components", tabName = "upload_file", icon = icon("file-upload")),
-    menuItem("Server Components", tabName = "server_col", icon = icon("server")),
-    menuItem("Misc", tabName = "other", icon = icon("border-all"))
+    menuItem("Basic", tabName = "basic", icon = icon("minus")),
+    menuItem("Multiple", tabName = "multi", icon = icon("align-justify")),
+    menuItem("Capture buttons", tabName = "btns", icon = icon("square")),
+    menuItem("Start as hidden", tabName = "hide", icon = icon("eye-slash"))
   )
 )
 
 body <- dashboardBody(
   tags$head(
     tags$link(href = "demo.css", rel = "stylesheet"),
-    tags$link(href = "https://github.com/lz100/drawR/blob/master/img/drawR.png?raw=true", rel = "icon"),
+    tags$link(href = "https://github.com/lz100/drawer/blob/master/img/drawer.png?raw=true", rel = "icon"),
   ),
   tabItems(
     tabItem(tabName = "welcome", uiWelcome("welcome")),
-    tabItem(tabName = "text", uiText("text")),
-    tabItem(tabName = "images", uiImages("images")),
-    tabItem(tabName = "buttons", uiButtons("buttons")),
-    tabItem(tabName = "progress", uiProgress("progress")),
-    tabItem(tabName = "other", uiOther("other")),
-    tabItem(tabName = "server_col", uiServerCol("server_col")),
-    tabItem(tabName = "upload_file", uiUploadFile("upload_file"))
+    tabItem(tabName = "basic", uiBasic("basic")),
+    tabItem(tabName = "multi", uiMulti("multi")),
+    tabItem(tabName = "btns", uiBtns("btns")),
+    tabItem(tabName = "hide", uiHide("hide"))
   )
 )
 
@@ -38,7 +32,7 @@ ui <- dashboardPage(
   header = header,
   sidebar = sidebar,
   body =  body,
-  title = "drawR Demo"
+  title = "drawer Demo"
 )
 
 

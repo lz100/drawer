@@ -249,7 +249,7 @@ if(interactive()){
           example code and watch how we do it in "canvas D-F".
           '
         ),
-        canvas(canvasID = "canvas_c",)
+        canvas(canvasID = "canvas_c")
       ),
       tabPanel(
         "Canvas D",

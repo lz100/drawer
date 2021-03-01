@@ -4,11 +4,17 @@ server <- function(input, output, session) {
 
 
   serverWelcome("welcome")
-  serverText("text")
-  serverImages("images")
-  serverButtons("buttons")
-  serverProgress("progress")
-  serverOther("other")
-  serverServerCol("server_col")
-  serverUploadFile("upload_file")
+  serverBasic("basic")
+  serverMulti("multi")
+  serverBtns("btns")
+  serverHide("hide")
+
+  output$plot_1 <- renderPlot({
+    ggplot(mpg, aes(cty, hwy)) +
+      geom_count(col="tomato3", show.legend=F)
+  })
+  output$plot_2 <- renderPlot({
+    ggplot(mpg, aes(cty, hwy)) +
+      geom_point()
+  })
 }

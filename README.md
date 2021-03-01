@@ -2,7 +2,7 @@
 
 {drawer} is an interactive image editing tool that can be added as part of the HTML in Shiny,
 R markdown or any type of HTML document. Often times, plots, photos are embedded
-in the web application/file. {drawer} can take a screenshot of these image-like, or 
+in the web application/file. {drawer} can take screenshots of these image-like elements, or 
 any part of the HTML document and send to an image editing space called "canvas" to allow users 
 immediately edit the screenshot(s) within the same document. Users can quickly 
 combine, compare different screenshots, upload their own images 

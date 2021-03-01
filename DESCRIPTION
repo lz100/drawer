@@ -3,10 +3,10 @@ Title: An Interactive HTML Image Editing Tool
 Version: 0.1.0
 Date: 2021-02-25
 Authors@R: c(person(given = "Le", family = "Zhang", role = c("aut", "cre"), email = "lezhang100@gmail.com"))
-Description: drawer is an interactive image editing tool that can be added as part of the HTML in Shiny,
+Description: An interactive image editing tool that can be added as part of the HTML in Shiny,
     R markdown or any type of HTML document. Often times, plots, photos are embedded
-    in the web application/file. {drawer} can take a screenshot of these image-like, or 
-    any part of the HTML document and send to an image editing space called "canvas" to allow users 
+    in the web application/file. 'drawer' can take screenshots of these image-like elements, or 
+    any part of the HTML document and send to an image editing space called 'canvas' to allow users 
     immediately edit the screenshot(s) within the same document. Users can quickly 
     combine, compare different screenshots, upload their own images 
     and maybe make a scientific figure. 

@@ -5,8 +5,13 @@ function toCanvas(dom, canvasID){
     toastr.error(`Canvas not found`, "", {positionClass: "toast-bottom-right", timeOut: 3500});
     throw new Error("Canvas not found");
   }
-  var node = document.querySelector(dom);
-  if (node === null) {
+  try {
+    var node = document.querySelector(dom);
+  } catch(err) {
+    toastr.error(`{${dom}} is not a valid selector`, "", {positionClass: "toast-bottom-right", timeOut: 3500});
+    throw new Error(err.message);
+  }
+  if (!node) {
     toastr.error(`Target DOM {${dom}} not found`, "", {positionClass: "toast-bottom-right", timeOut: 3500});
     throw new Error(`Target DOM {${dom}} not found`);
   }

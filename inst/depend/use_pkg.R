@@ -6,4 +6,6 @@ use_package("shiny")
 use_package("bsplus")
 use_package("utils")
 use_package("shiny")
+use_package("stringr")
+use_package("ggplot2", type = "Suggests")
 

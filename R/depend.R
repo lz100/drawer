@@ -73,14 +73,6 @@ drawrDepend <- function() {
         ),
       stylesheet = "css/drawr.css",
       all_files = FALSE
-    ),
-    htmltools::htmlDependency(
-      name = "drawR",
-      version = packageVersion("drawR"),
-      package = "drawR",
-      src = c(href = "drawr", file = "assets"),
-      attachment = "",
-      all_files = TRUE
-    ),
+    )
   )
 }

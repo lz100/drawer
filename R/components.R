@@ -1,7 +1,9 @@
 
-
-#' Screenshot a HTML component and send it to canvas
-#'
+#' Screenshot HTML elements to canvas button
+#' @description A bootstrap button that allows users to take a screenshot of
+#' specified HTML element (usually an image) and send it to the drawR canvas
+#' for editing. In addition, you can download it as "png" or "jpg" by opening
+#' up the dropdown menu.
 #' @param dom a HTML DOM selector, mostly common is to select the element by ID:
 #' e.g. a plot with ID "plot1", to select, use `dom = "plot1"` to select the plot if
 #' `isID = TRUE`. If `isID = FALSE`, use `dom = "#plot1"`
@@ -18,7 +20,8 @@
 #' @param label label of this button, optional
 #' @param color_class bootstrap button color class suffix, usually one of
 #' 'default', 'primary', 'info', 'success', 'warning', 'danger'
-#' @details This component will not work unless a drawR canvas has been loaded
+#' @details
+#' This component will not work unless a drawR canvas has been loaded
 #' on current document.
 #' @return a button
 #' @export
@@ -68,7 +71,7 @@ toCanvasBtn <-function(
   )
 }
 
-#' Screenshot any HTML element to canvas button
+#' Screenshot HTML elements to canvas text-button
 #' @description Unlike [toCanvasBtn] only screenshot a defined element, this function
 #' can take screenshot of any element you specify in the text box and sent to canvas
 #' by using Jquery  selector format.
@@ -101,7 +104,7 @@ toCanvasBtn <-function(
 #' have an "id", in this case, you need some advanced selectors. Learn about them by
 #' Google "CSS selector".
 #' @examples
-#' # see the example of `canvas`
+#' # see the example of "canvas", `?canvas`
 toCanvasTextBtn <- function(
   canvasID,
   label = "",

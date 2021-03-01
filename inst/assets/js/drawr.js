@@ -1,6 +1,7 @@
 
 /*-----------------------canvas class and methods----------------------------*/
 var drawR = {};
+drawR.canvasInit = {};
 
 class drawr {
   constructor(canvasID, height='default', width='default', startZoom=2) {
@@ -472,7 +473,7 @@ class drawr {
       handleDragUpload(files, this.canvasID, e, this);
     } else {
       var img = document.querySelector(`#img-box-${this.canvasID} img.drawr-canvas-img-dragging`);
-      canvasLoadImg.bind(this)(img, e);
+      canvasLoadImg.bind(this)(img, e, 0, 0);
     }
     this.classList.remove('drawr-canvas-over');
     return false;

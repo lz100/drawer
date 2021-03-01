@@ -6,21 +6,23 @@ Authors@R: c(person(given = "Le", family = "Zhang", role = c("aut", "cre"), emai
 Description: drawR is an interactive image editing tool that can be added as part of the HTML in Shiny,
     R markdown or any type of HTML document. Often times, plots, photos are embedded
     in the web application/file. {drawR} can take a screenshot of these image-like, or 
-    any part of the HTML document and send to a canvas-like workbench to allow users 
+    any part of the HTML document and send to an image editing space called "canvas" to allow users 
     immediately edit the screenshot(s) within the same document. Users can quickly 
-    combine, compare different screenshots and maybe make a scientific figure. 
+    combine, compare different screenshots, upload their own images 
+    and maybe make a scientific figure. 
 Depends:
-    R (>= 4.0.0),
-    spsUtil
+    R (>= 4.0.0)
 Imports:
     htmltools,
     magrittr,
     glue,
     bsplus,
     utils,
-    shiny
+    shiny,
+    stringr
 Suggests:
-    testthat
+    testthat,
+    ggplot2
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

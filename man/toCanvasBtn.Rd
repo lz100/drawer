@@ -2,14 +2,14 @@
 % Please edit documentation in R/components.R
 \name{toCanvasBtn}
 \alias{toCanvasBtn}
-\title{Screenshot a HTML component and send it to canvas}
+\title{Screenshot HTML elements to canvas button}
 \usage{
 toCanvasBtn(
   dom,
   canvasID,
   isID = TRUE,
   id = "",
-  label = "To canvas",
+  label = "To Canvas",
   color_class = "primary"
 )
 }
@@ -40,7 +40,14 @@ if the selector is other than ID.}
 a button
 }
 \description{
-Screenshot a HTML component and send it to canvas
+A bootstrap button that allows users to take a screenshot of
+specified HTML element (usually an image) and send it to the drawR canvas
+for editing. In addition, you can download it as "png" or "jpg" by opening
+up the dropdown menu.
+}
+\details{
+This component will not work unless a drawR canvas has been loaded
+on current document.
 }
 \examples{
 # see example of "canvas", `?canvas`

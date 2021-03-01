@@ -3,13 +3,18 @@
 #' drawR main canvas workbench compinent
 #' @description use this function on Shiny UI or R markdown to create the
 #' image editing area.
+#'
 #' @param canvasID string, an unique HTML ID
 #' @param title string, title of the canvas
 #' @param height string, css value of initial height of the canvas, like "100vh"
-#' for full height current window, "50vh" for half. Consider the banner takes
-#' some height, so default is set to "90vh".
+#' for full height current window, "50vh" for half.
 #' @param width string, css value of initial width of the canvas
 #' @param on_start `TRUE` or a CSS selector. See details
+#' @param logo_src string, link of an image you want to display as logo on the
+#' top left
+#' @param log_link string, a link, when the logo is clicked, where should it jump to
+#' @param rmarkdown bool, are you using inside R markdown? If yes, drawR will copy
+#' all image icons that required by the canvas to current directory to `./drawr/img/...`
 #'
 #' @return a HTML component to be added to a Shiny app or document
 #' @details
@@ -17,10 +22,22 @@
 #' **If you are not working in Shiny or R markdown, you need to add the**
 #' **required full "Bootstrap3" javascript and CSS + latest "jquery" dependencies by yourself.**
 #'
+#' ### height and width
+#' There are two options for canvas height and width:
+#' - dynamic CSS units like "100vh" (viewpoint height), "100vw" (view point width),
+#' or "100%" for both. This kind of units adapt to all kinds of user screen settings.
+#'
+#' - fixed unit, `px` (pixels). This does not change across users, but fixes
+#' the `on_start` problem (read below).
+#'
 #' ### height
 #' - `height`, css style `vh` is safer than `%` is not safe, unless the parent
 #' has some defined height, "%" will work. Otherwise, if the parent height is "auto"
 #' or not defined, and you choose "100%", canvas will still have 0 height.
+#'
+#' Width usually does not have this problem. As long as an element is displayed,
+#' it has some width.
+#'
 #'
 #' ### `on_start`
 #' This argument specify if you want to initiate the canvas when the document is loaded.
@@ -32,7 +49,9 @@
 #'
 #' The solution is to bind the initiation with a clicking event, like on a tab or a button.
 #' For example, make a button on the second tab and bind `on_start` to that button:
-#' `on_start = "buttonID"`. Then when users click on that button, canvas initiate.
+#' `on_start = "#buttonID"`. Then when users click on that button, canvas initiate.
+#' Remember this is a Jquery CSS selector, which means you need to append "#" in
+#' front your button ID.
 #'
 #' If you want to do it automatically, like clicking on a certain tab, some CSS
 #' knowledge may required. For example, in Shiny, you can use [shiny::tabsetPanel]
@@ -46,10 +65,20 @@
 #' )
 #'
 #' ````
-#' Then, bind to it `canvas(on_start = '#tabs ul a[data-value="B"]', ...)`.
+#' Then, bind to it `canvas(on_start = '#tabs li a[data-value="B"]', ...)`.
 #' This means we are selecting the element with ID "tabs", which is the main tabsetPanel
-#' ID, then a list (`ul`) which is the tab titles you see on UI, and finally, the
+#' ID, then a list item (`li`) which is the tab titles you see on UI, and finally, the
 #' link jump to tab B, (`a[data-value="B"]`). See examples for a real case.
+#'
+#' Another way to fix it is by given the `height` and `width` a fixed pixel unit:
+#'
+#' ```r
+#' canvas(
+#'     canvasID = "canvas_f",
+#'     height = "900px",
+#'     width = "1500px"
+#' )
+#' ```
 #'
 #' ### Upload your own image to canvas
 #' You can drag your own images to the canvas.
@@ -59,29 +88,221 @@
 #' @export
 #'
 #' @examples
+#' # basic usage
+#' if(interactive()){
+#'   library(shiny)
+#'
+#'   ui <- fluidPage(
+#'     h3("Try to drag pictures locally to canvas"),
+#'     canvas("canvas_a")
+#'   )
+#'
+#'   server <- function(input, output, session) {
+#'
+#'   }
+#'
+#'   shinyApp(ui, server)
+#' }
+#'
+#' # multiple canvas on a page
+#' if(interactive()){
+#'   library(shiny)
+#'
+#'   ui <- fluidPage(
+#'     h3("multiple canvas on a page"),
+#'     p("They are independent"),
+#'     p("Dragging from one canvas to another is not supported currently"),
+#'     column(6, canvas("canvas_left")),
+#'     column(6, canvas("canvas_right"))
+#'   )
+#'
+#'   server <- function(input, output, session) {
+#'
+#'   }
+#'
+#'   shinyApp(ui, server)
+#' }
+#'
+#' # with capture buttons buttons
+#' if(interactive()){
+#'   library(shiny)
+#'   library(ggplot2)
+#'   ui <- fluidPage(
+#'     fluidRow(
+#'       id = "new_row",
+#'       column(
+#'         6,
+#'         h3("this is a title"),
+#'         column(6, tags$label("plot 1"), plotOutput("plot_1")),
+#'         column(6, tags$label("plot 2"), plotOutput("plot_2")),
+#'       ),
+#'       column(
+#'         6,
+#'         h2("To canvas buttons"),
+#'         h4("pure button with `toCanvasBtn`"),
+#'         toCanvasBtn(
+#'           dom = "plot_1",
+#'           label = "capture plot 1",
+#'           canvasID = "canvas_b"
+#'         ), br(),
+#'         toCanvasBtn(
+#'           dom = "capture_button",
+#'           label = "capture this button itself",
+#'           canvasID = "canvas_b",
+#'           id = "capture_button"
+#'         ), br(),
+#'         toCanvasBtn(
+#'           dom = "#new_row .col-sm-6:first-of-type",
+#'           label = "complex selector to select left column",
+#'           canvasID = "canvas_b",
+#'           isID = FALSE
+#'         ), br(),
+#'         h4("button text input for any part of document with `toCanvasBtn`"),
+#'         toCanvasTextBtn(
+#'           label = "try #plot_2 to for plot 2 or other selector",
+#'           canvasID = "canvas_b",
+#'           text_value = "#plot_2"
+#'         )
+#'       )
+#'     ),
+#'     canvas("canvas_b")
+#'   )
+#'
+#'   server <- function(input, output, session) {
+#'     output$plot_1 <- renderPlot({
+#'       ggplot(mpg, aes(cty, hwy)) +
+#'         geom_count(col="tomato3", show.legend=F)
+#'     })
+#'     output$plot_2 <- renderPlot({
+#'       ggplot(mpg, aes(cty, hwy)) +
+#'         geom_point()
+#'     })
+#'   }
+#'
+#'   shinyApp(ui, server)
+#' }
+#'
+#' # start canvas as hidden, initiate later in tab panels
+#' if(interactive()){
+#'   library(shiny)
+#'
+#'   ui <- fluidPage(
+#'     tabsetPanel(
+#'       id = "tabs",
+#'       tabPanel(
+#'         "Home page",
+#'         value = "tab_1",
+#'         h4("Content on home page ...."),
+#'         p("Canvas is hidden on start, go to other tabs")
+#'       ),
+#'       tabPanel(
+#'         "Canvas C",
+#'         value = "tab_2",
+#'         markdown(
+#'           '
+#'           # canvas hidden on start
+#'           In this example, you will see if the canvas is hidden,
+#'           not on the first tab in a `tabsetPanel`, or other similar
+#'           UI where you do not see canvas on start. Then, the canvas
+#'           cannot be initiate properly using the default height value (100vh).
+#'           Using the dynamic computed CSS height like "100%", or "100vh" with "hidden"
+#'           (display = none) elements give the height of `0` on start.
+#'           So, you **should not see the canvas** on this tab, but a broken
+#'           structure and no canvas grid.
+#'
+#'           To fix it, either give it a fixed `height` and `width` pixel unit, like
+#'
+#'           - `height = "800px"`, `width = "1500px"`
+#'
+#'           or bind the initiation event to a click of a button, the tab title or
+#'           any other element you specify with the `on_start` argument. See the
+#'           example code and watch how we do it in "canvas D-F".
+#'           '
+#'         ),
+#'         canvas(canvasID = "canvas_c",)
+#'       ),
+#'       tabPanel(
+#'         "Canvas D",
+#'         value = "tab_3",
+#'         h4("Initiate canvas by a button"),
+#'         actionButton("start_canvas", "Start Canvas C"),
+#'         canvas(
+#'           canvasID = "canvas_d",
+#'           on_start = "#start_canvas"
+#'         )
+#'       ),
+#'       tabPanel(
+#'         "Canvas E",
+#'         value = "tab_4",
+#'         h4("Initiate canvas by clicking tab title"),
+#'         p("Canvas initiate when first time users come to this tab"),
+#'         canvas(
+#'           canvasID = "canvas_e",
+#'           on_start = "#tabs li a[data-value='tab_4']"
+#'         )
+#'       ),
+#'       tabPanel(
+#'         "Canvas F",
+#'         value = "tab_5",
+#'         h4("Initiate canvas with fixed height and width"),
+#'         canvas(
+#'           canvasID = "canvas_f",
+#'           height = "800px",
+#'           width = "1500px"
+#'         )
+#'       )
+#'     )
+#'   )
+#'
+#'   server <- function(input, output, session) {
+#'
+#'   }
+#'
+#'   shinyApp(ui, server)
+#' }
 canvas = function(
   canvasID,
   title = "drawR",
-  height = "90vh",
+  height = "100vh",
   width = "100%",
   logo_src = "drawr/img/drawr.png",
   log_link = "https://github.com/lz100/drawR",
-  on_start = TRUE
+  on_start = TRUE,
+  rmarkdown = FALSE
   ) {
 
   stopifnot(is.character(canvasID) && length(canvasID) == 1)
   stopifnot(is.character(title) && length(title) == 1)
   stopifnot(is.character(height) && length(height) == 1)
   stopifnot(is.character(width) && length(width) == 1)
-  stopifnot(is.logical(on_start) && length(width) == 1)
+  stopifnot(is.character(logo_src) && length(width) == 1)
+  stopifnot(is.character(log_link) && length(width) == 1)
+  stopifnot(is.logical(rmarkdown) && length(rmarkdown) == 1)
+  stopifnot(length(on_start) == 1)
+
+  container_height <- if(stringr::str_ends(height, "px")) stringr::str_remove(height, "px") else "\"default\""
+  container_width <- if(stringr::str_ends(width, "px")) stringr::str_remove(width, "px") else "\"default\""
+
+  if(rmarkdown) {
+    drawr_img_folder <- file.path(getwd(), "drawr")
+    dir.create(drawr_img_folder, recursive = TRUE, showWarnings = FALSE)
+    file.copy(
+      system.file("assets", "img", package = "drawR"),
+      drawr_img_folder,
+      overwrite = TRUE,
+      recursive = TRUE
+    )
+  }
+
   div(
     class = "drawr",
     div(
       class = "canvas-box",
       id = canvasID,
       style = paste0(
-        "height: ", height, ";\n",
-        "width: ", width, ";\n"
+        "height: ", height, "; ",
+        "width: ", width, "; ",
+        'display:', if(isTRUE(on_start)) "block; " else "none; "
       ),
       div(
         id = paste0("canvas-banner-", canvasID),
@@ -237,6 +458,7 @@ canvas = function(
       ),
       div(
         class = "canvas-body",
+        style = paste0('height: calc(', height, ' - 42px);'),
         div(
           id = paste0("canvas-left-", canvasID),
           class ="split split-horizontal canvas-left",
@@ -331,23 +553,34 @@ canvas = function(
           tags$canvas(id=paste0("canvas-b-", canvasID), class = "canvas-canvas")
         ),
         if(isTRUE(on_start)){
-          tags$script(paste0(
-            '$(function(){',
-            'drawR.', canvasID, ' = new drawr("', canvasID, '");',
-            '});'
+          tags$script(glue(.open = "@{", .close = "}@",
+            '\n
+            $(function(){
+               drawR.@{canvasID}@ = new drawr(
+                 "@{canvasID}@",
+                  @{container_height}@,
+                  @{container_width}@
+               );
+            });
+            \n'
           ))
         } else {
-          tags$script(paste0(
-            'var canvasInit = false;
-                    $("',  on_start, '").on("click", function(){
-                        if (!canvasInit){
-                            setTimeout(function() {',
-            'drawR.', canvasID, ' = new drawr("', canvasID, '");
-                                canvasInit = true;
-                            }, 1000)
-                        }
-                    });
-                    '
+          tags$script(glue(.open = "@{", .close = "}@",
+            '\n
+            $("@{on_start}@").on("click", function(){
+              if (!drawR.canvasInit.@{canvasID}@){
+                $("#@{canvasID}@").show();
+                setTimeout(function() {
+                  drawR.@{canvasID}@ = new drawr(
+                    "@{canvasID}@",
+                    @{container_height}@,
+                    @{container_width}@
+                  );
+                  drawR.canvasInit.@{canvasID}@ = true;
+                }, 1000)
+              }
+            });
+            \n'
           ))
         }
       )

@@ -23,7 +23,7 @@ types of server in the back-end. That's why you can use it in any HTML document.
 |---|---|
 |Pure HTML|[hosted online](https://systempipe.org/sps/dev/drawr/drawr_independent.html)|
 |Pure HTML (github)|[download and open in your browser](https://github.com/lz100/drawR/blob/master/examples/rmd_demo/drawr_independent.html)|
-|Shiny|[shinyapp.io)(https://lezhang.shinyapps.io/drawR)|
+|Shiny|[shinyapp.io](https://lezhang.shinyapps.io/drawR)|
 |R markdown|[syspipe.org](https://systempipe.org/sps/dev/drawr/drawr_rmd_demo.html)|
 
 

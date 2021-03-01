@@ -1,0 +1,150 @@
+---
+title: "drawer R Markdown demos"
+author: "Le Zhang"
+date: "2/28/2021"
+output: html_document
+---
+
+```{css, echo=FALSE, eval=TRUE}
+body {
+    max-width: 2000px !important;
+}
+.main-container {
+  max-width: 90vw !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Simple usage
+
+{[drawer](https://github.com/lz100/drawer)} is compatible with R markdown. If you 
+only want a portable image editting tool, you can do it as simple as:
+
+```{r}
+library(drawer)
+library(ggplot2) # we will make some plots later
+canvas("simple_canvas", rmarkdown = TRUE)
+```
+
+<p class="text-danger">When you use source code to reproduce this R markdown, open it in **browser** instead of the built-in viewer in **Rstudio**. canvas will be as expected in buil-in the viewer.</p>
+
+## Capture buttons
+
+To capture pictures or plots in the docuemnt to canvas to do further editing:
+
+### `toCanvasBtn`
+**1. Create some elements in R markdown with some HTML identifier, like HTML `id`, **
+**or other advanced CSS selector (read help file `?canvas`).**
+
+Lets create some plots, remeber to create some identifiers for them. In R markdown,
+the easiest way is to create `id` by adding `out.extra='id="xx"'` tag in your 
+R chunk setting: `{r out.extra='id="plot1"'}`
+
+````md
+```{r echo=FALSE, out.extra='id="plot1"'}`r ''`
+ggplot(mpg, aes(cty, hwy)) +
+  geom_count(col="tomato3", show.legend=F)
+```
+````
+
+
+```{r echo=FALSE, out.extra='id="plot1"'}
+ggplot(mpg, aes(cty, hwy)) +
+  geom_count(col="tomato3", show.legend=F)
+```
+
+
+**2. Create the capture buttons, or the capture text buttons.**
+
+```{r}
+toCanvasBtn(
+  dom = "plot1",
+  canvasID = "simple_canvas"
+)
+```
+
+We are telling the button to capture screenshots of "plot1" and send it to canvas.
+Now, **click on the button and then scroll back to the canvas**. You should see it 
+has been added to the "Images/Plots" left sidebar. Then, you can simply drag the 
+image from the list to canvas and start your editing.
+
+This button also allows you to download the screenshot as a *png* or *jpg*. 
+
+**3. Capture more than just an image**
+
+You can capture any HTML element/chunks to the canvas, for example we have some text 
+in Rmakrdown (for better capture, we also change the display CSS style a little):
+
+<div id = "some_text"  style="display:inline-block">
+#### This is a title in Rmarkdown
+some text follows....
+
+- a list
+- b
+- c
+</div>
+
+```{html eval=FALSE}
+<div id="some_text" style="display:inline-block">
+#### This is a title in Rmarkdown
+some text follows....
+
+- a list
+- b
+- c
+</div>
+```
+
+```{r}
+toCanvasBtn(
+  dom = "some_text",
+  canvasID = "simple_canvas"
+)
+```
+
+
+### `toCanvasTextBtn`
+
+The `toCanvasTextBtn` allows users to capture any elements in current document. 
+So, instead of the author of the Rmarkdown who specifies which element to capture, 
+this time, users/readers can decide what to capture by fill in the text-input. 
+
+```{r out.extra='id="plot2"'}
+ggplot(mpg, aes(cty, hwy)) +
+    geom_point()
+```
+
+Another plot with `id='plot2'` has created, now first use the text button group below 
+to capture it.
+
+```{r}
+toCanvasTextBtn(
+  canvasID = "simple_canvas",
+  text_value = "#plot2",
+  style = "width: 50%"
+)
+```
+
+Then change it to "#plot1" see if you could capture the previous plot by this button.
+
+The thing to notice here is it uses CSS selector, so for `id`, you need to append 
+`#` in front `#element_id`. Of course, you can advanced selectors to select elements 
+that have no `id`. Learn them by Google "CSS selector".
+
+
+
+
+
+
+
+
+
+
+
+

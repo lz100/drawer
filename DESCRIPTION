@@ -1,11 +1,11 @@
-Package: drawR
+Package: drawer
 Title: An Interactive HTML Image Editing Tool
 Version: 0.1.0
 Date: 2021-02-25
 Authors@R: c(person(given = "Le", family = "Zhang", role = c("aut", "cre"), email = "lezhang100@gmail.com"))
-Description: drawR is an interactive image editing tool that can be added as part of the HTML in Shiny,
+Description: drawer is an interactive image editing tool that can be added as part of the HTML in Shiny,
     R markdown or any type of HTML document. Often times, plots, photos are embedded
-    in the web application/file. {drawR} can take a screenshot of these image-like, or 
+    in the web application/file. {drawer} can take a screenshot of these image-like, or 
     any part of the HTML document and send to an image editing space called "canvas" to allow users 
     immediately edit the screenshot(s) within the same document. Users can quickly 
     combine, compare different screenshots, upload their own images 
@@ -26,8 +26,8 @@ Suggests:
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-BugReports: https://github.com/lz100/drawR/issues
-URL: https://github.com/lz100/drawR
+BugReports: https://github.com/lz100/drawer/issues
+URL: https://github.com/lz100/drawer
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3

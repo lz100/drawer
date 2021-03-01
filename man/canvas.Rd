@@ -2,15 +2,15 @@
 % Please edit documentation in R/canvas.R
 \name{canvas}
 \alias{canvas}
-\title{drawR main canvas workbench compinent}
+\title{drawer main canvas workbench compinent}
 \usage{
 canvas(
   canvasID,
-  title = "drawR",
+  title = "drawer",
   height = "100vh",
   width = "100\%",
-  logo_src = "drawr/img/drawr.png",
-  log_link = "https://github.com/lz100/drawR",
+  logo_src = "drawer/img/drawer.png",
+  log_link = "https://github.com/lz100/drawer",
   on_start = TRUE,
   rmarkdown = FALSE
 )
@@ -32,8 +32,8 @@ top left}
 
 \item{on_start}{\code{TRUE} or a CSS selector. See details}
 
-\item{rmarkdown}{bool, are you using inside R markdown? If yes, drawR will copy
-all image icons that required by the canvas to current directory to \code{./drawr/img/...}}
+\item{rmarkdown}{bool, are you using inside R markdown? If yes, drawer will copy
+all image icons that required by the canvas to current directory to \code{./drawer/img/...}}
 }
 \value{
 a HTML component to be added to a Shiny app or document

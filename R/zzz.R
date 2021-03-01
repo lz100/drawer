@@ -10,5 +10,5 @@ NULL
 #' @noRd
 #'
 .onLoad <- function(...) {
-    shiny::addResourcePath('drawr', system.file("assets", package = "drawR"))
+    shiny::addResourcePath('drawer', system.file("assets", package = "drawer"))
 }

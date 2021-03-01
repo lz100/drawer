@@ -1,6 +1,6 @@
 ################################ Main Canvas ###############################
 
-#' drawR main canvas workbench compinent
+#' drawer main canvas workbench compinent
 #' @description use this function on Shiny UI or R markdown to create the
 #' image editing area.
 #'
@@ -13,8 +13,8 @@
 #' @param logo_src string, link of an image you want to display as logo on the
 #' top left
 #' @param log_link string, a link, when the logo is clicked, where should it jump to
-#' @param rmarkdown bool, are you using inside R markdown? If yes, drawR will copy
-#' all image icons that required by the canvas to current directory to `./drawr/img/...`
+#' @param rmarkdown bool, are you using inside R markdown? If yes, drawer will copy
+#' all image icons that required by the canvas to current directory to `./drawer/img/...`
 #'
 #' @return a HTML component to be added to a Shiny app or document
 #' @details
@@ -262,11 +262,11 @@
 #' }
 canvas = function(
   canvasID,
-  title = "drawR",
+  title = "drawer",
   height = "100vh",
   width = "100%",
-  logo_src = "drawr/img/drawr.png",
-  log_link = "https://github.com/lz100/drawR",
+  logo_src = "drawer/img/drawer.png",
+  log_link = "https://github.com/lz100/drawer",
   on_start = TRUE,
   rmarkdown = FALSE
   ) {
@@ -284,18 +284,18 @@ canvas = function(
   container_width <- if(stringr::str_ends(width, "px")) stringr::str_remove(width, "px") else "\"default\""
 
   if(rmarkdown) {
-    drawr_img_folder <- file.path(getwd(), "drawr")
-    dir.create(drawr_img_folder, recursive = TRUE, showWarnings = FALSE)
+    drawer_img_folder <- file.path(getwd(), "drawer")
+    dir.create(drawer_img_folder, recursive = TRUE, showWarnings = FALSE)
     file.copy(
-      system.file("assets", "img", package = "drawR"),
-      drawr_img_folder,
+      system.file("assets", "img", package = "drawer"),
+      drawer_img_folder,
       overwrite = TRUE,
       recursive = TRUE
     )
   }
 
   div(
-    class = "drawr",
+    class = "drawer",
     div(
       class = "canvas-box",
       id = canvasID,
@@ -311,9 +311,9 @@ canvas = function(
           class = "banner-items",
           tags$a(
             href = log_link,
-            class = "drawr-logo",
+            class = "drawer-logo",
             target = "_blank",
-            tags$img(src = "drawr/img/drawr.png"),
+            tags$img(src = "drawer/img/drawer.png"),
             tags$span(title)
           ),
         ),
@@ -332,9 +332,9 @@ canvas = function(
               <div class="check-box"></div>
               <a href="#">Save as...</a>
               <ul class="dropdown-menu">
-               <li ><a href="#"', paste0('onclick=drawR["', canvasID, '"].saveAsImg()'), '>png</a></li>
-               <li ><a href="#"', paste0('onclick=drawR["', canvasID, '"].saveAsImg(false)'), '>jpg</a></li>
-               <li ><a href="#"', paste0('onclick=drawR["', canvasID, '"].saveAsSvg()'), '>svg (coming soon...)</a></li>
+               <li ><a href="#"', paste0('onclick=Drawer["', canvasID, '"].saveAsImg()'), '>png</a></li>
+               <li ><a href="#"', paste0('onclick=Drawer["', canvasID, '"].saveAsImg(false)'), '>jpg</a></li>
+               <li ><a href="#"', paste0('onclick=Drawer["', canvasID, '"].saveAsSvg()'), '>svg (coming soon...)</a></li>
               </ul>
             </li>
           </ul>
@@ -390,47 +390,47 @@ canvas = function(
         div(class = "vr"),
         bannerBtn(
           paste0("canvas-undo-", canvasID),
-          tags$i(tags$img(src = "drawr/img/undo.png", width=15, height=15)),
+          tags$i(tags$img(src = "drawer/img/undo.png", width=15, height=15)),
           tip = "undo Ctrl+z",
-          onclick = paste0('drawR["', canvasID, '"].undo()'),
+          onclick = paste0('Drawer["', canvasID, '"].undo()'),
           disabled = ""
         ),
         bannerBtn(
           paste0("canvas-redo-", canvasID),
-          tags$i(tags$img(src = "drawr/img/redo.png", width=15, height=15)),
+          tags$i(tags$img(src = "drawer/img/redo.png", width=15, height=15)),
           tip = "redo Ctrl+shift+z",
-          onclick = paste0('drawR["', canvasID, '"].redo()'),
+          onclick = paste0('Drawer["', canvasID, '"].redo()'),
           disabled = ""
         ),
         bannerBtn(
           paste0("canvas-front-", canvasID),
-          tags$i(tags$img(src = "drawr/img/tofront.png", width=15, height=15)),
+          tags$i(tags$img(src = "drawer/img/tofront.png", width=15, height=15)),
           tip = "bring to front",
-          onclick = paste0('drawR["', canvasID, '"].toFront()')
+          onclick = paste0('Drawer["', canvasID, '"].toFront()')
         ),
         bannerBtn(
           paste0("canvas-forward-", canvasID),
-          tags$i(tags$img(src = "drawr/img/forward.png", width=15, height=15)),
+          tags$i(tags$img(src = "drawer/img/forward.png", width=15, height=15)),
           tip = "move forward",
-          onclick = paste0('drawR["', canvasID, '"].toForward()')
+          onclick = paste0('Drawer["', canvasID, '"].toForward()')
         ),
         bannerBtn(
           paste0("canvas-backward-", canvasID),
-          tags$i(tags$img(src = "drawr/img/backward.png", width=15, height=15)),
+          tags$i(tags$img(src = "drawer/img/backward.png", width=15, height=15)),
           tip = "move backward",
-          onclick = paste0('drawR["', canvasID, '"].toBackward()')
+          onclick = paste0('Drawer["', canvasID, '"].toBackward()')
         ),
         bannerBtn(
           paste0("canvas-back-", canvasID),
-          tags$i(tags$img(src = "drawr/img/toback.png", width=15, height=15)),
+          tags$i(tags$img(src = "drawer/img/toback.png", width=15, height=15)),
           tip = "bring to back",
-          onclick = paste0('drawR["', canvasID, '"].toBack()')
+          onclick = paste0('Drawer["', canvasID, '"].toBack()')
         ),
         bannerBtn(
           paste0("canvas-del-", canvasID),
           icon("trash"),
           tip = "delete (del)",
-          onclick = paste0('drawR["', canvasID, '"].delItem()')
+          onclick = paste0('Drawer["', canvasID, '"].delItem()')
         ),
         div(class = "vr"),
         div(
@@ -441,7 +441,7 @@ canvas = function(
             `data-toggle` = 'tooltip',
             `data-placement` = 'left',
             title = "object opacity",
-            onclick = paste0('drawR["', canvasID, '"].changeOpacity($("#canvas-opacity-', canvasID , '").val())'),
+            onclick = paste0('Drawer["', canvasID, '"].changeOpacity($("#canvas-opacity-', canvasID , '").val())'),
             tags$option("100%", value = 1),
             tags$option("90%", value = 0.9),
             tags$option("80%", value = 0.8),
@@ -484,50 +484,50 @@ canvas = function(
                   label = "New iText",
                   icon("i-cursor"),
                   tip = "Create new text",
-                  onclick = paste0('drawR["', canvasID, '"].newItext()')
+                  onclick = paste0('Drawer["', canvasID, '"].newItext()')
                 ),
                 tags$hr(),
                 bannerBtn(
                   paste0("canvas-bold-", canvasID),
                   icon("bold"),
                   tip = "Bold ctrl+b",
-                  onclick = paste0('drawR["', canvasID, '"].itextBold()')
+                  onclick = paste0('Drawer["', canvasID, '"].itextBold()')
                 ),
                 bannerBtn(
                   paste0("canvas-italic-", canvasID),
                   icon("italic"),
                   tip = "italic ctrl+i",
-                  onclick = paste0('drawR["', canvasID, '"].itextItalic()')
+                  onclick = paste0('Drawer["', canvasID, '"].itextItalic()')
                 ),
                 bannerBtn(
                   paste0("canvas-underline-", canvasID),
                   icon("underline"),
                   tip = "underline",
-                  onclick = paste0('drawR["', canvasID, '"].itextUnderline()')
+                  onclick = paste0('Drawer["', canvasID, '"].itextUnderline()')
                 ),
                 bannerBtn(
                   paste0("canvas-linethrough-", canvasID),
                   icon("strikethrough"),
                   tip = "Linethrough",
-                  onclick = paste0('drawR["', canvasID, '"].itextLinethrough()')
+                  onclick = paste0('Drawer["', canvasID, '"].itextLinethrough()')
                 ),
                 bannerBtn(
                   paste0("canvas-superscript-", canvasID),
                   icon("superscript"),
                   tip = "superscript ctrl+.",
-                  onclick = paste0('drawR["', canvasID, '"].itextSuperScript()')
+                  onclick = paste0('Drawer["', canvasID, '"].itextSuperScript()')
                 ),
                 bannerBtn(
                   paste0("canvas-subscript-", canvasID),
                   icon("subscript"),
                   tip = "subscript ctrl+,",
-                  onclick = paste0('drawR["', canvasID, '"].itextSubScript()')
+                  onclick = paste0('Drawer["', canvasID, '"].itextSubScript()')
                 ),
                 bannerBtn(
                   paste0("canvas-removeformat-", canvasID),
                   icon("remove-format"),
                   tip = "remove script Ctrl+shift+.",
-                  onclick = paste0('drawR["', canvasID, '"].itextRemoveFormat()')
+                  onclick = paste0('Drawer["', canvasID, '"].itextRemoveFormat()')
                 ),
                 tags$hr(),
                 div(
@@ -556,7 +556,7 @@ canvas = function(
           tags$script(glue(.open = "@{", .close = "}@",
             '\n
             $(function(){
-               drawR.@{canvasID}@ = new drawr(
+               Drawer.@{canvasID}@ = new drawer(
                  "@{canvasID}@",
                   @{container_height}@,
                   @{container_width}@
@@ -568,15 +568,15 @@ canvas = function(
           tags$script(glue(.open = "@{", .close = "}@",
             '\n
             $("@{on_start}@").on("click", function(){
-              if (!drawR.canvasInit.@{canvasID}@){
+              if (!Drawer.canvasInit.@{canvasID}@){
                 $("#@{canvasID}@").show();
                 setTimeout(function() {
-                  drawR.@{canvasID}@ = new drawr(
+                  Drawer.@{canvasID}@ = new drawer(
                     "@{canvasID}@",
                     @{container_height}@,
                     @{container_width}@
                   );
-                  drawR.canvasInit.@{canvasID}@ = true;
+                  Drawer.canvasInit.@{canvasID}@ = true;
                 }, 1000)
               }
             });
@@ -637,9 +637,9 @@ canvas = function(
     bsModal(
       id = paste0(canvasID, "-help"),
       title = "About the canvas",
-      p("drawR V0.1"),
+      p("drawer V0.1"),
       p("This canvas is developed by Le Zhang and other contributors under GPL-3 License")
     ),
-    drawrDepend()
+    drawerDepend()
   )
 }

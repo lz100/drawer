@@ -1,0 +1,25 @@
+---
+output: html_document
+---
+
+```{css, echo=FALSE, eval=TRUE}
+body {
+    max-width: 2000px !important;
+}
+.main-container {
+  max-width: 100vw !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=F}
+library(drawer)
+library(ggplot2) # we will make some plots later
+canvas("simple_canvas", rmarkdown = TRUE)
+```

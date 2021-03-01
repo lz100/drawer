@@ -41,12 +41,12 @@ a button
 }
 \description{
 A bootstrap button that allows users to take a screenshot of
-specified HTML element (usually an image) and send it to the drawR canvas
+specified HTML element (usually an image) and send it to the drawer canvas
 for editing. In addition, you can download it as "png" or "jpg" by opening
 up the dropdown menu.
 }
 \details{
-This component will not work unless a drawR canvas has been loaded
+This component will not work unless a drawer canvas has been loaded
 on current document.
 }
 \examples{

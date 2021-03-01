@@ -9,7 +9,7 @@ toCanvasTextBtn(
   label = "",
   text_value = "",
   placeholder = "type a selector",
-  tooltip = "Screenshot any element to drawR canvas",
+  tooltip = "Screenshot any element to drawer canvas",
   placement = "bottom",
   btn_label = "To Canvas",
   color_class = "primary",
@@ -45,7 +45,7 @@ can take screenshot of any element you specify in the text box and sent to canva
 by using Jquery  selector format.
 }
 \details{
-This component will not work unless a drawR canvas has been loaded
+This component will not work unless a drawer canvas has been loaded
 on current document.
 \subsection{Input selector}{
 

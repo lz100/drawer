@@ -1,7 +1,7 @@
 
 #' Screenshot HTML elements to canvas button
 #' @description A bootstrap button that allows users to take a screenshot of
-#' specified HTML element (usually an image) and send it to the drawR canvas
+#' specified HTML element (usually an image) and send it to the drawer canvas
 #' for editing. In addition, you can download it as "png" or "jpg" by opening
 #' up the dropdown menu.
 #' @param dom a HTML DOM selector, mostly common is to select the element by ID:
@@ -21,7 +21,7 @@
 #' @param color_class bootstrap button color class suffix, usually one of
 #' 'default', 'primary', 'info', 'success', 'warning', 'danger'
 #' @details
-#' This component will not work unless a drawR canvas has been loaded
+#' This component will not work unless a drawer canvas has been loaded
 #' on current document.
 #' @return a button
 #' @export
@@ -87,7 +87,7 @@ toCanvasBtn <-function(
 #' @param placement where should the tooltip go?
 #' @export
 #' @return a shiny input group
-#' @details This component will not work unless a drawR canvas has been loaded
+#' @details This component will not work unless a drawer canvas has been loaded
 #' on current document.
 #'
 #' ### Input selector
@@ -110,7 +110,7 @@ toCanvasTextBtn <- function(
   label = "",
   text_value ="",
   placeholder = "type a selector",
-  tooltip = "Screenshot any element to drawR canvas",
+  tooltip = "Screenshot any element to drawer canvas",
   placement = "bottom",
   btn_label = "To Canvas",
   color_class = "primary",

@@ -1,7 +1,7 @@
 Package: drawer
 Title: An Interactive HTML Image Editing Tool
-Version: 0.1.0
-Date: 2021-02-25
+Version: 0.1.0.9
+Date: 2021-03-02
 Authors@R: c(person(given = "Le", family = "Zhang", role = c("aut", "cre"), email = "lezhang100@gmail.com"))
 Description: An interactive image editing tool that can be added as part of the HTML in Shiny,
     R markdown or any type of HTML document. Often times, plots, photos are embedded

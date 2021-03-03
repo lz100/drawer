@@ -308,7 +308,7 @@ class drawer {
             );
           }
           // add bound box and info
-          if(drawer[canvasID].opts.boundBox){
+          if(Drawer[canvasID].opts.boundBox){
             var bound = ao.getBoundingRect();
             canvas.contextContainer.strokeRect(
               bound.left,

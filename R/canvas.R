@@ -556,7 +556,7 @@ canvas = function(
           tags$script(glue(.open = "@{", .close = "}@",
             '\n
             $(function(){
-               Drawer.@{canvasID}@ = new drawer(
+               Drawer["@{canvasID}@"] = new drawer(
                  "@{canvasID}@",
                   @{container_height}@,
                   @{container_width}@
@@ -571,7 +571,7 @@ canvas = function(
               if (!Drawer.canvasInit.@{canvasID}@){
                 $("#@{canvasID}@").show();
                 setTimeout(function() {
-                  Drawer.@{canvasID}@ = new drawer(
+                  Drawer["@{canvasID}@"] = new drawer(
                     "@{canvasID}@",
                     @{container_height}@,
                     @{container_width}@

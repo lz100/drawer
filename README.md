@@ -44,7 +44,7 @@ if (!requireNamespace("drawer", quietly=TRUE))
 
 ## User manual 
 
-Read details of drawer on [our website](https://systempipe.org/sps/canvas/).
+Read details of drawer on [our website](https://systempipe.org/sps/dev/drawer/).
 
 ## About drawer
 {drawer} is originally part of systemPipeShiny (SPS), the SPS Canvas functionality.

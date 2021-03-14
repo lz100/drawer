@@ -618,7 +618,7 @@ canvas = function(
           tags$tr(tags$td('italic'),  tags$td('Ctrl+i'), tags$td('')),
           tags$tr(tags$td('superscript'),  tags$td('Ctrl+.'), tags$td('Only works in text editing mode')),
           tags$tr(tags$td('subscript'),  tags$td('Ctrl+,'), tags$td('Only works in text editing mode')),
-          tags$tr(tags$td('renmove script'),  tags$td('Ctrl + shift + .'), tags$td('Only works in text editing mode'))
+          tags$tr(tags$td('remove script'),  tags$td('Ctrl + shift + .'), tags$td('Only works in text editing mode'))
         ),
         tags$label("*Use Command key instead of Ctrl on Mac")
       ),

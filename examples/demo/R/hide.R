@@ -14,7 +14,7 @@ uiHide <- function(id) {
           cannot be initiate properly using the default height value (100vh).
           Using the dynamic computed CSS height like "100%", or "100vh" with "hidden"
           (display = none) elements give the height of `0` on start.
-          So, you **should not see the canvas** on this "Canvas C", but a broken
+          So, you **should see the canvas** on the "Canvas C", but it is a broken
           structure and no canvas grid.
 
           To fix it, either give it a fixed `height` and `width` pixel unit, like
@@ -95,7 +95,8 @@ uiHide <- function(id) {
         tabPanel(
           "Canvas C",
           value = "tab_2",
-          canvas(canvasID = "canvas_c")
+          h4("Broken canvas"),
+          canvas(canvasID = "canvas_c", title = "Broken canvas")
         ),
         tabPanel(
           "Canvas D",

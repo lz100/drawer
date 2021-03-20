@@ -20,6 +20,5 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r echo=F}
 library(drawer)
-library(ggplot2) # we will make some plots later
 canvas("simple_canvas", rmarkdown = TRUE)
 ```

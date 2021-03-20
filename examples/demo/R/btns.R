@@ -10,7 +10,7 @@ uiBtns <- function(id) {
           '
           - use `spsCodeBtn` to capture an element (defined by the developer), usually by the HTML `id`
           - use `toCanvasTextBtn` to capture any element (defined by the user input).
-            Note: it uses CSS selector, a little difference is you need to add "#"
+            Note: it uses CSS selector, the little difference is you need to add "#"
             before the `id`, like "#my_id".
           '
         )
@@ -50,9 +50,9 @@ uiBtns <- function(id) {
                 canvasID = "canvas_b",
                 isID = FALSE
               ), br(),
-              h4("button text input for any part of document with `toCanvasBtn`"),
+              h4("button text input for any part of document with `toCanvasTextBtn`"),
               toCanvasTextBtn(
-                label = "try #plot_2 to for plot 2 or other selector",
+                label = "try #plot_2 to capture plot 2 or other selector",
                 canvasID = "canvas_b",
                 text_value = "#plot_2"
               )
@@ -102,9 +102,9 @@ uiBtns <- function(id) {
             canvasID = "canvas_b",
             isID = FALSE
           ), br(),
-          h4("button text input for any part of document with `toCanvasBtn`"),
+          h4("button text input for any part of document with `toCanvasTextBtn`"),
           toCanvasTextBtn(
-            label = "try #plot_2 to for plot 2 or other selector",
+            label = "try #plot_2 to capture plot 2 or other selector to capture random HTML elements",
             canvasID = "canvas_b",
             text_value = "#plot_2"
           )

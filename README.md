@@ -8,6 +8,10 @@ immediately edit the screenshot(s) within the same document. Users can quickly
 combine, compare different screenshots, upload their own images 
 and maybe make a scientific figure. 
 
+
+![](https://systempipe.org/sps/dev/drawer/drawer_demo.png)
+
+
 ## Features 
 
 - {drawer} is built with 99% javascript + HTML + CSS, there is **no need to have a Shiny server** or any other 

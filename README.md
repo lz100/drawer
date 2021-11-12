@@ -42,8 +42,9 @@ install.packages("drawer")
 Develop version:
 
 ```r
-if (!requireNamespace("drawer", quietly=TRUE))
-    remotes::install_github("lz100/drawer")
+if (!requireNamespace("remotes", quietly=TRUE))
+    install.packages("remotes")
+remotes::install_github("lz100/drawer")
 ```
 
 ## User manual 

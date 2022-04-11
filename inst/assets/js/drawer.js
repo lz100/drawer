@@ -52,6 +52,7 @@ class drawer {
 
 
     // find images
+    var dragWeb = false; // a flag indicating img drag is from web not uploaded
     this.imgs = document.querySelectorAll(`#img-box-${this.canvasID} img`);
     [].forEach.call(this.imgs, function(img) {
       img.addEventListener('dragstart',  this.handleDragStart, false);
@@ -431,15 +432,13 @@ class drawer {
   */
   // handle iamges
   handleDragStart(e) {
-    e.dataTransfer.setData('text/plain', '');
+    e.dataTransfer.setData('text/plain', 'not_uploaded');
     $(`#img-box-${this.canvasID} img`).removeClass('drawer-canvas-img-dragging');
     this.classList.add('drawer-canvas-img-dragging');
-    // console.log("start");
   }
 
   handleDragEnd(e) {
     $(this).removeClass('drawer-canvas-img-dragging');
-    // console.log("end");
   }
 
   // handle canvas
@@ -464,16 +463,19 @@ class drawer {
   }
 
   handleDrop(e) {
-  	e.preventDefault();
-    if (e.stopPropagation) {
-        e.stopPropagation(); // stops the browser from redirecting.
-    }
+    e.stopPropagation();
+    e.preventDefault();
     var files = e.dataTransfer.files;
-    if(files.length > 0) {
-      handleDragUpload(files, this.canvasID, e, this);
-    } else {
+    //console.log(this)
+    //console.log(files)
+    //console.log(e.dataTransfer)
+    //console.log(e.dataTransfer.getData("text/plain"))
+    //console.log(files)
+    if(e.dataTransfer.getData("text/plain") === "not_uploaded") {
       var img = document.querySelector(`#img-box-${this.canvasID} img.drawer-canvas-img-dragging`);
       canvasLoadImg.bind(this)(img, e, 0, 0);
+    } else {
+      handleDragUpload(files, this.canvasID, e, this);
     }
     this.classList.remove('drawer-canvas-over');
     return false;

@@ -88,7 +88,7 @@ front your button ID.
 
 If you want to do it automatically, like clicking on a certain tab, some CSS
 knowledge may required. For example, in Shiny, you can use \link[shiny:tabsetPanel]{shiny::tabsetPanel}
-to create a tab panel.\if{html}{\out{<div class="r">}}\preformatted{tabsetPanel(id = "tabs",
+to create a tab panel.\if{html}{\out{<div class="sourceCode r">}}\preformatted{tabsetPanel(id = "tabs",
     tabPanel("Tab A", value = "A", ...),
     tabPanel("Tab B", value = "B", ...),
     ...
@@ -101,7 +101,7 @@ This means we are selecting the element with ID "tabs", which is the main tabset
 ID, then a list item (\code{li}) which is the tab titles you see on UI, and finally, the
 link jump to tab B, (\verb{a[data-value="B"]}). See examples for a real case.
 
-Another way to fix it is by given the \code{height} and \code{width} a fixed pixel unit:\if{html}{\out{<div class="r">}}\preformatted{canvas(
+Another way to fix it is by given the \code{height} and \code{width} a fixed pixel unit:\if{html}{\out{<div class="sourceCode r">}}\preformatted{canvas(
     canvasID = "canvas_f",
     height = "900px",
     width = "1500px"

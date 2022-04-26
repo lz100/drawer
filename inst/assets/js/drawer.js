@@ -52,7 +52,6 @@ class drawer {
 
 
     // find images
-    var dragWeb = false; // a flag indicating img drag is from web not uploaded
     this.imgs = document.querySelectorAll(`#img-box-${this.canvasID} img`);
     [].forEach.call(this.imgs, function(img) {
       img.addEventListener('dragstart',  this.handleDragStart, false);

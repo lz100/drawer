@@ -1,3 +1,9 @@
+# drawer 0.2.0.1
+
+## Minor 
+
+-   Fix Rd files as requested by CRAN.
+
 # drawer 0.2.0.0
 
 ## bug fix

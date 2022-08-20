@@ -18,7 +18,7 @@ image editing area."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">drawer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.1</span>
       </span>
     </div>
 
@@ -55,43 +55,60 @@ image editing area.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">canvas</span><span class="op">(</span>
-  <span class="va">canvasID</span>,
-  title <span class="op">=</span> <span class="st">"drawer"</span>,
-  height <span class="op">=</span> <span class="st">"100vh"</span>,
-  width <span class="op">=</span> <span class="st">"100%"</span>,
-  logo_src <span class="op">=</span> <span class="st">"drawer/img/drawer.png"</span>,
-  log_link <span class="op">=</span> <span class="st">"https://github.com/lz100/drawer"</span>,
-  on_start <span class="op">=</span> <span class="cn">TRUE</span>,
-  rmarkdown <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">canvas</span><span class="op">(</span></span>
+<span>  <span class="va">canvasID</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"drawer"</span>,</span>
+<span>  height <span class="op">=</span> <span class="st">"100vh"</span>,</span>
+<span>  width <span class="op">=</span> <span class="st">"100%"</span>,</span>
+<span>  logo_src <span class="op">=</span> <span class="st">"drawer/img/drawer.png"</span>,</span>
+<span>  log_link <span class="op">=</span> <span class="st">"https://github.com/lz100/drawer"</span>,</span>
+<span>  on_start <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rmarkdown <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>canvasID</dt>
 <dd><p>string, an unique HTML ID</p></dd>
+
+
 <dt>title</dt>
 <dd><p>string, title of the canvas</p></dd>
+
+
 <dt>height</dt>
 <dd><p>string, css value of initial height of the canvas, like "100vh"
 for full height current window, "50vh" for half.</p></dd>
+
+
 <dt>width</dt>
 <dd><p>string, css value of initial width of the canvas</p></dd>
+
+
 <dt>logo_src</dt>
 <dd><p>string, link of an image you want to display as logo on the
 top left</p></dd>
+
+
 <dt>log_link</dt>
 <dd><p>string, a link, when the logo is clicked, where should it jump to</p></dd>
+
+
 <dt>on_start</dt>
 <dd><p><code>TRUE</code> or a CSS selector. See details</p></dd>
+
+
 <dt>rmarkdown</dt>
 <dd><p>bool, are you using inside R markdown? If yes, drawer will copy
 all image icons that required by the canvas to current directory to <code>./drawer/img/...</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a HTML component to be added to a Shiny app or document</p>
+    
+
+<p>a HTML component to be added to a Shiny app or document</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -141,20 +158,23 @@ Remember this is a Jquery CSS selector, which means you need to append "#" in
 front your button ID.</p>
 <p>If you want to do it automatically, like clicking on a certain tab, some CSS
 knowledge may required. For example, in Shiny, you can use <a href="https://rdrr.io/pkg/shiny/man/tabsetPanel.html" class="external-link">shiny::tabsetPanel</a>
-to create a tab panel.</p><div class="sourceCode r"><pre><code><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabsetPanel.html" class="external-link">tabsetPanel</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"tabs"</span>,
-    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span><span class="st">"Tab A"</span>, value <span class="op">=</span> <span class="st">"A"</span>, <span class="va">...</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span><span class="st">"Tab B"</span>, value <span class="op">=</span> <span class="st">"B"</span>, <span class="va">...</span><span class="op">)</span>,
-    <span class="va">...</span>
-<span class="op">)</span></code></pre><p></p></div>
+to create a tab panel.</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabsetPanel.html" class="external-link">tabsetPanel</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"tabs"</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span><span class="st">"Tab A"</span>, value <span class="op">=</span> <span class="st">"A"</span>, <span class="va">...</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span><span class="st">"Tab B"</span>, value <span class="op">=</span> <span class="st">"B"</span>, <span class="va">...</span><span class="op">)</span>,</span>
+<span>    <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span></code></pre><p></p></div>
 <p>Then, bind to it <code>canvas(on_start = '#tabs li a[data-value="B"]', ...)</code>.
 This means we are selecting the element with ID "tabs", which is the main tabsetPanel
 ID, then a list item (<code>li</code>) which is the tab titles you see on UI, and finally, the
 link jump to tab B, (<code>a[data-value="B"]</code>). See examples for a real case.</p>
-<p>Another way to fix it is by given the <code>height</code> and <code>width</code> a fixed pixel unit:</p><div class="sourceCode r"><pre><code><span class="fu"><a href="../reference/canvas.html">canvas</a></span><span class="op">(</span>
-    canvasID <span class="op">=</span> <span class="st">"canvas_f"</span>,
-    height <span class="op">=</span> <span class="st">"900px"</span>,
-    width <span class="op">=</span> <span class="st">"1500px"</span>
-<span class="op">)</span></code></pre><p></p></div>
+<p>Another way to fix it is by given the <code>height</code> and <code>width</code> a fixed pixel unit:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/canvas.html">canvas</a></span><span class="op">(</span></span>
+<span>    canvasID <span class="op">=</span> <span class="st">"canvas_f"</span>,</span>
+<span>    height <span class="op">=</span> <span class="st">"900px"</span>,</span>
+<span>    width <span class="op">=</span> <span class="st">"1500px"</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
 </div>
 
 <div class="section">
@@ -171,178 +191,178 @@ Moving images like
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># basic usage</span></span>
-<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Try to drag pictures locally to canvas"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu">canvas</span><span class="op">(</span><span class="st">"canvas_a"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># multiple canvas on a page</span></span>
-<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"multiple canvas on a page"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"They are independent"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Dragging from one canvas to another is not supported currently"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fu">canvas</span><span class="op">(</span><span class="st">"canvas_left"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fu">canvas</span><span class="op">(</span><span class="st">"canvas_right"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># with capture buttons buttons</span></span>
-<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span>
-<span class="r-in">      id <span class="op">=</span> <span class="st">"new_row"</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fl">6</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"this is a title"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>, <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"plot 1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"plot_1"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>, <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"plot 2"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"plot_2"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fl">6</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h2</a></span><span class="op">(</span><span class="st">"To canvas buttons"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"pure button with `toCanvasBtn`"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="toCanvasBtn.html">toCanvasBtn</a></span><span class="op">(</span></span>
-<span class="r-in">          dom <span class="op">=</span> <span class="st">"plot_1"</span>,</span>
-<span class="r-in">          label <span class="op">=</span> <span class="st">"capture plot 1"</span>,</span>
-<span class="r-in">          canvasID <span class="op">=</span> <span class="st">"canvas_b"</span></span>
-<span class="r-in">        <span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="toCanvasBtn.html">toCanvasBtn</a></span><span class="op">(</span></span>
-<span class="r-in">          dom <span class="op">=</span> <span class="st">"capture_button"</span>,</span>
-<span class="r-in">          label <span class="op">=</span> <span class="st">"capture this button itself"</span>,</span>
-<span class="r-in">          canvasID <span class="op">=</span> <span class="st">"canvas_b"</span>,</span>
-<span class="r-in">          id <span class="op">=</span> <span class="st">"capture_button"</span></span>
-<span class="r-in">        <span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="toCanvasBtn.html">toCanvasBtn</a></span><span class="op">(</span></span>
-<span class="r-in">          dom <span class="op">=</span> <span class="st">"#new_row .col-sm-6:first-of-type"</span>,</span>
-<span class="r-in">          label <span class="op">=</span> <span class="st">"complex selector to select left column"</span>,</span>
-<span class="r-in">          canvasID <span class="op">=</span> <span class="st">"canvas_b"</span>,</span>
-<span class="r-in">          isID <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in">        <span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"button text input for any part of document with `toCanvasBtn`"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="toCanvasTextBtn.html">toCanvasTextBtn</a></span><span class="op">(</span></span>
-<span class="r-in">          label <span class="op">=</span> <span class="st">"try #plot_2 to for plot 2 or other selector"</span>,</span>
-<span class="r-in">          canvasID <span class="op">=</span> <span class="st">"canvas_b"</span>,</span>
-<span class="r-in">          text_value <span class="op">=</span> <span class="st">"#plot_2"</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu">canvas</span><span class="op">(</span><span class="st">"canvas_b"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="va">output</span><span class="op">$</span><span class="va">plot_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
-<span class="r-in">      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">cty</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_count.html" class="external-link">geom_count</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"tomato3"</span>, show.legend<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">output</span><span class="op">$</span><span class="va">plot_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
-<span class="r-in">      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">cty</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># start canvas as hidden, initiate later in tab panels</span></span>
-<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabsetPanel.html" class="external-link">tabsetPanel</a></span><span class="op">(</span></span>
-<span class="r-in">      id <span class="op">=</span> <span class="st">"tabs"</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"Home page"</span>,</span>
-<span class="r-in">        value <span class="op">=</span> <span class="st">"tab_1"</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Content on home page ...."</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Canvas is hidden on start, go to other tabs"</span><span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"Canvas C"</span>,</span>
-<span class="r-in">        value <span class="op">=</span> <span class="st">"tab_2"</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/markdown.html" class="external-link">markdown</a></span><span class="op">(</span></span>
-<span class="r-in">          <span class="st">'</span>
-<span class="r-in">          # canvas hidden on start</span>
-<span class="r-in">          In this example, you will see if the canvas is hidden,</span>
-<span class="r-in">          not on the first tab in a `tabsetPanel`, or other similar</span>
-<span class="r-in">          UI where you do not see canvas on start. Then, the canvas</span>
-<span class="r-in">          cannot be initiate properly using the default height value (100vh).</span>
-<span class="r-in">          Using the dynamic computed CSS height like "100%", or "100vh" with "hidden"</span>
-<span class="r-in">          (display = none) elements give the height of `0` on start.</span>
-<span class="r-in">          So, you **should not see the canvas** on this tab, but a broken</span>
-<span class="r-in">          structure and no canvas grid.</span>
-<span class="r-in"></span>
-<span class="r-in">          To fix it, either give it a fixed `height` and `width` pixel unit, like</span>
-<span class="r-in"></span>
-<span class="r-in">          - `height = "800px"`, `width = "1500px"`</span>
-<span class="r-in"></span>
-<span class="r-in">          or bind the initiation event to a click of a button, the tab title or</span>
-<span class="r-in">          any other element you specify with the `on_start` argument. See the</span>
-<span class="r-in">          example code and watch how we do it in "canvas D-F".</span>
-<span class="r-in">          '</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">canvas</span><span class="op">(</span>canvasID <span class="op">=</span> <span class="st">"canvas_c"</span><span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"Canvas D"</span>,</span>
-<span class="r-in">        value <span class="op">=</span> <span class="st">"tab_3"</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Initiate canvas by a button"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"start_canvas"</span>, <span class="st">"Start Canvas C"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">canvas</span><span class="op">(</span></span>
-<span class="r-in">          canvasID <span class="op">=</span> <span class="st">"canvas_d"</span>,</span>
-<span class="r-in">          on_start <span class="op">=</span> <span class="st">"#start_canvas"</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"Canvas E"</span>,</span>
-<span class="r-in">        value <span class="op">=</span> <span class="st">"tab_4"</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Initiate canvas by clicking tab title"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Canvas initiate when first time users come to this tab"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">canvas</span><span class="op">(</span></span>
-<span class="r-in">          canvasID <span class="op">=</span> <span class="st">"canvas_e"</span>,</span>
-<span class="r-in">          on_start <span class="op">=</span> <span class="st">"#tabs li a[data-value='tab_4']"</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"Canvas F"</span>,</span>
-<span class="r-in">        value <span class="op">=</span> <span class="st">"tab_5"</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Initiate canvas with fixed height and width"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">canvas</span><span class="op">(</span></span>
-<span class="r-in">          canvasID <span class="op">=</span> <span class="st">"canvas_f"</span>,</span>
-<span class="r-in">          height <span class="op">=</span> <span class="st">"800px"</span>,</span>
-<span class="r-in">          width <span class="op">=</span> <span class="st">"1500px"</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># basic usage</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Try to drag pictures locally to canvas"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu">canvas</span><span class="op">(</span><span class="st">"canvas_a"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># multiple canvas on a page</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"multiple canvas on a page"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"They are independent"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Dragging from one canvas to another is not supported currently"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fu">canvas</span><span class="op">(</span><span class="st">"canvas_left"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fu">canvas</span><span class="op">(</span><span class="st">"canvas_right"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># with capture buttons buttons</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      id <span class="op">=</span> <span class="st">"new_row"</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"this is a title"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>, <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"plot 1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"plot_1"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>, <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"plot 2"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"plot_2"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h2</a></span><span class="op">(</span><span class="st">"To canvas buttons"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"pure button with `toCanvasBtn`"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="toCanvasBtn.html">toCanvasBtn</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>          dom <span class="op">=</span> <span class="st">"plot_1"</span>,</span></span>
+<span class="r-in"><span>          label <span class="op">=</span> <span class="st">"capture plot 1"</span>,</span></span>
+<span class="r-in"><span>          canvasID <span class="op">=</span> <span class="st">"canvas_b"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="toCanvasBtn.html">toCanvasBtn</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>          dom <span class="op">=</span> <span class="st">"capture_button"</span>,</span></span>
+<span class="r-in"><span>          label <span class="op">=</span> <span class="st">"capture this button itself"</span>,</span></span>
+<span class="r-in"><span>          canvasID <span class="op">=</span> <span class="st">"canvas_b"</span>,</span></span>
+<span class="r-in"><span>          id <span class="op">=</span> <span class="st">"capture_button"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="toCanvasBtn.html">toCanvasBtn</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>          dom <span class="op">=</span> <span class="st">"#new_row .col-sm-6:first-of-type"</span>,</span></span>
+<span class="r-in"><span>          label <span class="op">=</span> <span class="st">"complex selector to select left column"</span>,</span></span>
+<span class="r-in"><span>          canvasID <span class="op">=</span> <span class="st">"canvas_b"</span>,</span></span>
+<span class="r-in"><span>          isID <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"button text input for any part of document with `toCanvasBtn`"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="toCanvasTextBtn.html">toCanvasTextBtn</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>          label <span class="op">=</span> <span class="st">"try #plot_2 to for plot 2 or other selector"</span>,</span></span>
+<span class="r-in"><span>          canvasID <span class="op">=</span> <span class="st">"canvas_b"</span>,</span></span>
+<span class="r-in"><span>          text_value <span class="op">=</span> <span class="st">"#plot_2"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu">canvas</span><span class="op">(</span><span class="st">"canvas_b"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">output</span><span class="op">$</span><span class="va">plot_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">cty</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_count.html" class="external-link">geom_count</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"tomato3"</span>, show.legend<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">output</span><span class="op">$</span><span class="va">plot_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">cty</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># start canvas as hidden, initiate later in tab panels</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabsetPanel.html" class="external-link">tabsetPanel</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      id <span class="op">=</span> <span class="st">"tabs"</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"Home page"</span>,</span></span>
+<span class="r-in"><span>        value <span class="op">=</span> <span class="st">"tab_1"</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Content on home page ...."</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Canvas is hidden on start, go to other tabs"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"Canvas C"</span>,</span></span>
+<span class="r-in"><span>        value <span class="op">=</span> <span class="st">"tab_2"</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/markdown.html" class="external-link">markdown</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>          <span class="st">'</span></span></span>
+<span class="r-in"><span><span class="st">          # canvas hidden on start</span></span></span>
+<span class="r-in"><span><span class="st">          In this example, you will see if the canvas is hidden,</span></span></span>
+<span class="r-in"><span><span class="st">          not on the first tab in a `tabsetPanel`, or other similar</span></span></span>
+<span class="r-in"><span><span class="st">          UI where you do not see canvas on start. Then, the canvas</span></span></span>
+<span class="r-in"><span><span class="st">          cannot be initiate properly using the default height value (100vh).</span></span></span>
+<span class="r-in"><span><span class="st">          Using the dynamic computed CSS height like "100%", or "100vh" with "hidden"</span></span></span>
+<span class="r-in"><span><span class="st">          (display = none) elements give the height of `0` on start.</span></span></span>
+<span class="r-in"><span><span class="st">          So, you **should not see the canvas** on this tab, but a broken</span></span></span>
+<span class="r-in"><span><span class="st">          structure and no canvas grid.</span></span></span>
+<span class="r-in"><span><span class="st"></span></span></span>
+<span class="r-in"><span><span class="st">          To fix it, either give it a fixed `height` and `width` pixel unit, like</span></span></span>
+<span class="r-in"><span><span class="st"></span></span></span>
+<span class="r-in"><span><span class="st">          - `height = "800px"`, `width = "1500px"`</span></span></span>
+<span class="r-in"><span><span class="st"></span></span></span>
+<span class="r-in"><span><span class="st">          or bind the initiation event to a click of a button, the tab title or</span></span></span>
+<span class="r-in"><span><span class="st">          any other element you specify with the `on_start` argument. See the</span></span></span>
+<span class="r-in"><span><span class="st">          example code and watch how we do it in "canvas D-F".</span></span></span>
+<span class="r-in"><span><span class="st">          '</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">canvas</span><span class="op">(</span>canvasID <span class="op">=</span> <span class="st">"canvas_c"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"Canvas D"</span>,</span></span>
+<span class="r-in"><span>        value <span class="op">=</span> <span class="st">"tab_3"</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Initiate canvas by a button"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"start_canvas"</span>, <span class="st">"Start Canvas C"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">canvas</span><span class="op">(</span></span></span>
+<span class="r-in"><span>          canvasID <span class="op">=</span> <span class="st">"canvas_d"</span>,</span></span>
+<span class="r-in"><span>          on_start <span class="op">=</span> <span class="st">"#start_canvas"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"Canvas E"</span>,</span></span>
+<span class="r-in"><span>        value <span class="op">=</span> <span class="st">"tab_4"</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Initiate canvas by clicking tab title"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Canvas initiate when first time users come to this tab"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">canvas</span><span class="op">(</span></span></span>
+<span class="r-in"><span>          canvasID <span class="op">=</span> <span class="st">"canvas_e"</span>,</span></span>
+<span class="r-in"><span>          on_start <span class="op">=</span> <span class="st">"#tabs li a[data-value='tab_4']"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/tabPanel.html" class="external-link">tabPanel</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"Canvas F"</span>,</span></span>
+<span class="r-in"><span>        value <span class="op">=</span> <span class="st">"tab_5"</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Initiate canvas with fixed height and width"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">canvas</span><span class="op">(</span></span></span>
+<span class="r-in"><span>          canvasID <span class="op">=</span> <span class="st">"canvas_f"</span>,</span></span>
+<span class="r-in"><span>          height <span class="op">=</span> <span class="st">"800px"</span>,</span></span>
+<span class="r-in"><span>          width <span class="op">=</span> <span class="st">"1500px"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -357,7 +377,7 @@ Moving images like
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

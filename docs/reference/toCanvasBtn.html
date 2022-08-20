@@ -20,7 +20,7 @@ up the dropdown menu.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">drawer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.1</span>
       </span>
     </div>
 
@@ -59,14 +59,14 @@ up the dropdown menu.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">toCanvasBtn</span><span class="op">(</span>
-  <span class="va">dom</span>,
-  <span class="va">canvasID</span>,
-  isID <span class="op">=</span> <span class="cn">TRUE</span>,
-  id <span class="op">=</span> <span class="st">""</span>,
-  label <span class="op">=</span> <span class="st">"To Canvas"</span>,
-  color_class <span class="op">=</span> <span class="st">"primary"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">toCanvasBtn</span><span class="op">(</span></span>
+<span>  <span class="va">dom</span>,</span>
+<span>  <span class="va">canvasID</span>,</span>
+<span>  isID <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  id <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  label <span class="op">=</span> <span class="st">"To Canvas"</span>,</span>
+<span>  color_class <span class="op">=</span> <span class="st">"primary"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -79,23 +79,36 @@ e.g. a plot with ID "plot1", to select, use <code>dom = "plot1"</code> to select
 like <code>dom = ".btn i"</code> selects an icon inside an element
 with "btn" class. If more than one element is matched, only the first one will
 be screenshoted.</p></dd>
+
+
 <dt>canvasID</dt>
 <dd><p>string, the ID of canvas. Unlike <code>dom</code>, you should not add
 "#" for <code>canvasID</code> even if <code>isID=FALSE</code></p></dd>
+
+
 <dt>isID</dt>
 <dd><p>bool, <code>TRUE</code> if you want to select the <code>dom</code> by HTML ID, <code>FALSE</code>
 if the selector is other than ID.</p></dd>
+
+
 <dt>id</dt>
 <dd><p>string, ID for this button, optional</p></dd>
+
+
 <dt>label</dt>
 <dd><p>label of this button, optional</p></dd>
+
+
 <dt>color_class</dt>
 <dd><p>bootstrap button color class suffix, usually one of
 'default', 'primary', 'info', 'success', 'warning', 'danger'</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a button</p>
+    
+
+<p>a button</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -105,7 +118,7 @@ on current document.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># see example of "canvas", `?canvas`</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># see example of "canvas", `?canvas`</span></span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -121,7 +134,7 @@ on current document.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

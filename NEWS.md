@@ -1,6 +1,12 @@
+# drawer 0.2.0.99 Dev
+
+## Bug Fix
+
+-   Fix FontAwesome 6.0 icon names
+
 # drawer 0.2.0.1
 
-## Minor 
+## Minor
 
 -   Fix Rd files as requested by CRAN.
 

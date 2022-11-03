@@ -525,7 +525,7 @@ canvas = function(
                 ),
                 bannerBtn(
                   paste0("canvas-removeformat-", canvasID),
-                  icon("remove-format"),
+                  icon("text-slash"),
                   tip = "remove script Ctrl+shift+.",
                   onclick = paste0('Drawer["', canvasID, '"].itextRemoveFormat()')
                 ),

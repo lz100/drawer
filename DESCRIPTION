@@ -26,7 +26,7 @@ Suggests:
 License: GPL (>= 3)
 Encoding: UTF-8
 BugReports: https://github.com/lz100/drawer/issues
-URL: https://github.com/lz100/drawer
+URL: https://systempipe.org/sps/dev/drawer, https://github.com/lz100/drawer
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
